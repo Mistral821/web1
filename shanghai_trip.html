@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上海 상하이 가족여행 · 2026.04</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;700&family=Noto+Sans+SC:wght@300;400;500&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1612;
+    --paper: #f7f4ef;
+    --red: #c0392b;
+    --red-light: #fde8e6;
+    --gold: #b8960c;
+    --gold-light: #fdf6dc;
+    --teal: #1a6b5c;
+    --teal-light: #e0f0ec;
+    --blue: #1a4a7a;
+    --blue-light: #e4edf8;
+    --muted: #7a7060;
+    --border: #ddd8ce;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Noto Serif KR', serif;
+    min-height: 100vh;
+  }
+
+  /* 헤더 */
+  .hero {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 3rem 1.5rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '上海';
+    position: absolute;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 14rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .hero-sub {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: rgba(247,244,239,0.5);
+    margin-bottom: 0.6rem;
+  }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.4rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+  }
+  .hero-title span {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 1.1rem;
+    font-weight: 300;
+    display: block;
+    margin-top: 0.3rem;
+    color: rgba(247,244,239,0.7);
+  }
+  .hero-meta {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    font-size: 0.8rem;
+    color: rgba(247,244,239,0.6);
+  }
+  .hero-meta b { color: var(--paper); font-weight: 400; }
+
+  /* 날씨 배너 */
+  .weather-strip {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+  }
+  .weather-day {
+    flex: 1;
+    min-width: 120px;
+    text-align: center;
+    padding: 0.6rem 0.8rem;
+    border-right: 1px solid var(--border);
+  }
+  .weather-day:last-child { border-right: none; }
+  .w-date {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-bottom: 2px;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .w-icon { font-size: 1.6rem; margin: 4px 0; }
+  .w-temp {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .w-temp span { font-weight: 300; color: var(--muted); font-size: 0.8rem; }
+  .w-desc {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .w-note {
+    font-size: 0.65rem;
+    color: var(--red);
+    margin-top: 3px;
+  }
+
+  /* 본문 */
+  .container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 2rem 1.2rem 4rem;
+  }
+
+  /* 날 카드 */
+  .day-card {
+    margin-bottom: 2.5rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  }
+
+  .day-header {
+    padding: 1rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .day-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2.8rem;
+    line-height: 1;
+    color: var(--border);
+    font-weight: 400;
+  }
+  .day-info { flex: 1; }
+  .day-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .day-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin: 2px 0;
+  }
+  .day-date {
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .day-badge {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-weight: 500;
+  }
+  .badge-blue { background: var(--blue-light); color: var(--blue); }
+  .badge-teal { background: var(--teal-light); color: var(--teal); }
+  .badge-gold { background: var(--gold-light); color: var(--gold); }
+  .badge-red  { background: var(--red-light);  color: var(--red); }
+
+  /* 일정 아이템 */
+  .items { padding: 0; }
+  .item {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .item:last-child { border-bottom: none; }
+
+  .item-time {
+    width: 90px;
+    min-width: 90px;
+    padding: 1rem 0.8rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: right;
+    border-right: 1px solid var(--border);
+    background: rgba(247,244,239,0.5);
+    line-height: 1.5;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+
+  .item-body {
+    flex: 1;
+    padding: 1rem 1.2rem;
+  }
+
+  .item-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .item-cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 5px;
+    font-weight: 300;
+  }
+  .item-desc {
+    font-size: 0.82rem;
+    color: #555;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 2px;
+    margin-top: 6px;
+    margin-right: 4px;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .tag-warn { background: var(--red-light); color: var(--red); }
+  .tag-tip  { background: var(--gold-light); color: var(--gold); }
+  .tag-info { background: var(--blue-light); color: var(--blue); }
+
+  /* 체크리스트 */
+  .checklist-section {
+    margin-top: 2rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .checklist-header {
+    background: var(--ink);
+    color: var(--paper);
+    padding: 0.8rem 1.4rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .checklist-body { padding: 1rem 1.4rem; }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-item input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: var(--red);
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .check-item label {
+    font-size: 0.83rem;
+    cursor: pointer;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .check-item label.done {
+    text-decoration: line-through;
+    color: var(--muted);
+  }
+  .check-cn {
+    font-family: 'Noto Sans SC', sans-serif;
+    color: var(--muted);
+    font-size: 0.72rem;
+  }
+
+  /* 푸터 */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: 'Noto Sans SC', sans-serif;
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: 1.8rem; }
+    .weather-strip { gap: 0; }
+    .weather-day { min-width: 80px; }
+    .item-time { width: 72px; min-width: 72px; font-size: 0.65rem; }
+    .day-num { font-size: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 헤더 -->
+<div class="hero">
+  <div class="hero-sub">2026 · FAMILY TRIP TO SHANGHAI</div>
+  <div class="hero-title">
+    Shanghai
+    <span>상하이 가족여행 일정표 · 上海家庭旅行行程</span>
+  </div>
+  <div class="hero-meta">
+    <div>출발 <b>4월 10일 (금)</b></div>
+    <div>귀국 <b>4월 13일 (월)</b></div>
+    <div>3박 4일 <b>4인 가족</b></div>
+  </div>
+</div>
+
+<!-- 날씨 배너 -->
+<div class="weather-strip">
+  <div class="weather-day">
+    <div class="w-date">4/10 (금) 도착일</div>
+    <div class="w-icon">🌤️</div>
+    <div class="w-temp">25° <span>/ 14°</span></div>
+    <div class="w-desc">구름조금 · 심야도착</div>
+  </div>
+  <div class="weather-day">
+    <div class="w-date">4/11 (토) 시내관광</div>
+    <div class="w-icon">⛅</div>
+    <div class="w-temp">25° <span>/ 13°</span></div>
+    <div class="w-desc">구름많음</div>
+    <div class="w-note">마스크 권장(황사)</div>
+  </div>
+  <div class="weather-day">
+    <div class="w-date">4/12 (일) 디즈니</div>
+    <div class="w-icon">🌥️</div>
+    <div class="w-temp">22° <span>/ 9°</span></div>
+    <div class="w-desc">흐림 · 야간 쌀쌀</div>
+    <div class="w-note">겉옷 필수!</div>
+  </div>
+  <div class="weather-day">
+    <div class="w-date">4/13 (월) 귀국일</div>
+    <div class="w-icon">🌤️</div>
+    <div class="w-temp">21° <span>/ 9°</span></div>
+    <div class="w-desc">구름조금</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- DAY 1 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">01</div>
+      <div class="day-info">
+        <div class="day-label">Day One · 第一天</div>
+        <div class="day-title">상하이 도착</div>
+        <div class="day-date">2026년 4월 10일 (금) · 2026年4月10日（周五）</div>
+      </div>
+      <div class="day-badge badge-blue">도착</div>
+    </div>
+    <div class="items">
+      <div class="item">
+        <div class="item-time">21:30<br>↓<br>22:45</div>
+        <div class="item-body">
+          <div class="item-title">CX370편 탑승 · 인천 → 푸동</div>
+          <div class="item-cn">乘坐CX370航班 · 仁川 → 浦东国际机场（T2）</div>
+          <div class="item-desc">인천국제공항(T1) 출발 → 상하이 푸동공항(T2) 도착</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">23:30<br>이후</div>
+        <div class="item-body">
+          <div class="item-title">숙소 이동 · 더 이튼 호텔 체크인</div>
+          <div class="item-cn">前往酒店 · The Eaton Hotel Shanghai 办理入住</div>
+          <div class="item-cn">上海市浦东新区浦东大道535号</div>
+          <div class="item-desc">공항 공식 승차장에서 택시 또는 DiDi(滴滴) 앱으로 이동<br>심야 도착이므로 바로 체크인 후 휴식</div>
+          <span class="tag tag-tip">앱 이름: 滴滴出行 (DiDi)</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">02</div>
+      <div class="day-info">
+        <div class="day-label">Day Two · 第二天</div>
+        <div class="day-title">해양수족관 & 시내 투어</div>
+        <div class="day-date">2026년 4월 11일 (토) · 2026年4月11日（周六）</div>
+      </div>
+      <div class="day-badge badge-teal">관광</div>
+    </div>
+    <div class="items">
+      <div class="item">
+        <div class="item-time">오전</div>
+        <div class="item-body">
+          <div class="item-title">상하이 해양수족관</div>
+          <div class="item-cn">上海海洋水族馆 · Shànghǎi Hǎiyáng Shuǐzúguǎn</div>
+          <div class="item-cn">浦东新区陆家嘴环路1388号（近东方明珠）</div>
+          <div class="item-desc">성인 1 + 아동 1 입장 · 세계 최장 155m 해저 터널<br>나머지 성인 2명 → 바로 옆 정다광장(Super Brand Mall) 또는 디즈니 플래그십 스토어</div>
+          <span class="tag tag-tip">동선 팁: 루자쭈이(陆家嘴)역 하차</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">오전<br>병행</div>
+        <div class="item-body">
+          <div class="item-title">정다광장 / 디즈니 플래그십 스토어</div>
+          <div class="item-cn">正大广场 (Zhèngdà Guǎngchǎng) · Super Brand Mall</div>
+          <div class="item-cn">迪士尼旗舰店 (Díshìní Qíjiàn Diàn)</div>
+          <div class="item-desc">수족관 비입장 성인 2명의 대기 쇼핑 장소<br>세계 최대 규모 디즈니 플래그십 스토어 위치</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">오후</div>
+        <div class="item-body">
+          <div class="item-title">난징동루 쇼핑 보행가</div>
+          <div class="item-cn">南京东路步行街 (Nánjīng Dōnglù Bùxíngjiē)</div>
+          <div class="item-desc">황푸강 건너 이동 후 아이 맞춤 쇼핑</div>
+          <div style="margin-top:6px;">
+            <span class="tag tag-info">POP MART · 泡泡玛特</span>
+            <span class="tag tag-info">M&M's 月饼 World</span>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">저녁</div>
+        <div class="item-body">
+          <div class="item-title">예원 & 와이탄 야경</div>
+          <div class="item-cn">豫园 (Yùyuán) · 外滩 (Wàitān)</div>
+          <div class="item-cn">豫园: 黄浦区安仁街218号 · 外滩: 中山东一路</div>
+          <div class="item-desc">중국 전통 정원 예원과 옛거리 관람 후<br>와이탄에서 화려한 야경 감상</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">03</div>
+      <div class="day-info">
+        <div class="day-label">Day Three · 第三天</div>
+        <div class="day-title">디즈니랜드 올인</div>
+        <div class="day-date">2026년 4월 12일 (일) · 2026年4月12日（周日）</div>
+      </div>
+      <div class="day-badge badge-gold">디즈니</div>
+    </div>
+    <div class="items">
+      <div class="item">
+        <div class="item-time">06:15<br>↓<br>07:15</div>
+        <div class="item-body">
+          <div class="item-title">더 이튼 호텔 체크아웃 → 노보텔 짐 이동</div>
+          <div class="item-cn">退房 → 搬行李至 诺富特上海四叶草酒店</div>
+          <div class="item-cn">诺富特: 上海市浦东新区秀浦路3188号</div>
+          <div class="item-desc">DiDi로 이동 · 노보텔 프론트에 짐 보관 요청</div>
+          <span class="tag tag-warn">13:30 공항 셔틀버스 미리 예약!</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">07:30</div>
+        <div class="item-body">
+          <div class="item-title">노보텔 → 디즈니 무료 셔틀 탑승</div>
+          <div class="item-cn">搭乘诺富特免费班车前往迪士尼乐园</div>
+          <div class="item-desc">노보텔 제공 디즈니랜드행 무료 셔틀버스</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">종일</div>
+        <div class="item-body">
+          <div class="item-title">상하이 디즈니랜드</div>
+          <div class="item-cn">上海迪士尼乐园 (Shànghǎi Díshìní Lèyuán)</div>
+          <div class="item-cn">浦东新区申迪西路310号</div>
+          <div class="item-desc">얼리버드 티켓 · 예약번호 <b>RBP352436</b><br>주토피아(朱迪亚) · 트론(创极速光轮) · 캐리비안의 해적(加勒比海盗)</div>
+          <span class="tag tag-warn">여권 원본 4개 필수 지참!</span>
+          <span class="tag tag-tip">4인 전원 개찰구에서 동시 스캔</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">21:15</div>
+        <div class="item-body">
+          <div class="item-title">일루미네이션 불꽃쇼</div>
+          <div class="item-cn">夜间烟花秀 (Yèjiān Yānhuā Xiù)</div>
+          <div class="item-desc">성 앞 연못 뒤편 다리 쪽 명당 자리 선점 권장<br>야간 기온 9°C — 얇은 패딩 또는 점퍼 필수</div>
+          <span class="tag tag-warn">12일 야간 쌀쌀 · 겉옷 꼭 챙기기</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">22:00<br>~22:30</div>
+        <div class="item-body">
+          <div class="item-title">노보텔 복귀 · 정식 체크인</div>
+          <div class="item-cn">返回诺富特 · 正式办理入住</div>
+          <div class="item-desc">셔틀버스 탑승 후 호텔 정식 체크인</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-num">04</div>
+      <div class="day-info">
+        <div class="day-label">Day Four · 第四天</div>
+        <div class="day-title">쇼핑 & 귀국</div>
+        <div class="day-date">2026년 4월 13일 (월) · 2026年4月13日（周一）</div>
+      </div>
+      <div class="day-badge badge-red">귀국</div>
+    </div>
+    <div class="items">
+      <div class="item">
+        <div class="item-time">08:30</div>
+        <div class="item-body">
+          <div class="item-title">노보텔 체크아웃</div>
+          <div class="item-cn">诺富特 退房 (Tuìfáng)</div>
+          <div class="item-desc">체크아웃 후 프론트에 캐리어 보관 요청</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">08:45<br>↓<br>09:45</div>
+        <div class="item-body">
+          <div class="item-title">RT-Mart 마트 쇼핑</div>
+          <div class="item-cn">大润发超市 (Dà Rùnfā Chāoshì)</div>
+          <div class="item-cn">浦东新区秀沿路1032号</div>
+          <div class="item-desc">귀국 선물용 과자·간식류 구매<br>검색어: 大润发 / 秀沿路1032号</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">09:50<br>↓<br>12:00</div>
+        <div class="item-body">
+          <div class="item-title">저우푸 완다플라자</div>
+          <div class="item-cn">周浦万达广场 (Zhōupǔ Wàndá Guǎngchǎng)</div>
+          <div class="item-cn">浦东新区年家浜路518号</div>
+          <div class="item-desc">오전 10시 오픈 · 유니클로(优衣库) · 무인양품(无印良品) 쇼핑<br>몰 내에서 이른 점심 식사</div>
+          <span class="tag tag-tip">검색어: 周浦万达广场</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">12:00<br>↓<br>13:20</div>
+        <div class="item-body">
+          <div class="item-title">노보텔 복귀 · 대기</div>
+          <div class="item-cn">返回诺富特 · 等待班车</div>
+          <div class="item-desc">캐리어 정리 후 로비에서 셀프 원두커피(2인 포함) 마시며 대기</div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">13:30</div>
+        <div class="item-body">
+          <div class="item-title">공항 셔틀 탑승</div>
+          <div class="item-cn">搭乘机场班车 (Jīchǎng Bānchē)</div>
+          <div class="item-desc">출발 10분 전 로비 대기 → 푸동공항(T2)행 셔틀버스</div>
+          <span class="tag tag-warn">전날 반드시 예약 완료할 것</span>
+        </div>
+      </div>
+      <div class="item">
+        <div class="item-time">17:05<br>↓<br>20:05</div>
+        <div class="item-body">
+          <div class="item-title">CX369편 탑승 · 귀국</div>
+          <div class="item-cn">乘坐CX369航班 · 浦东（T2）→ 仁川（T1）</div>
+          <div class="item-desc">푸동공항(T2) 출발 → 인천국제공항(T1) 도착 · 여행 종료</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 핵심 체크리스트 -->
+  <div class="checklist-section">
+    <div class="checklist-header">✓ 출발 전 핵심 체크리스트 · 出发前必备清单</div>
+    <div class="checklist-body">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c1">
+        <label for="c1">여권 원본 4개 확인 <span class="check-cn">· 护照原件 4本</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c2">
+        <label for="c2">디즈니 얼리버드 티켓 확인 (예약번호 RBP352436) <span class="check-cn">· 迪士尼早鸟票</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c3">
+        <label for="c3">노보텔 13:30 공항 셔틀 예약 <span class="check-cn">· 诺富特机场班车预约</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c4">
+        <label for="c4">DiDi(滴滴) 앱 설치 및 결제수단 등록 <span class="check-cn">· 滴滴出行 APP</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c5">
+        <label for="c5">마스크 준비 (황사 대비) <span class="check-cn">· 口罩 准备</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c6">
+        <label for="c6">4월 12일 저녁용 겉옷/얇은 패딩 챙기기 (9°C) <span class="check-cn">· 外套/薄羽绒服</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c7">
+        <label for="c7">아동 위치추적 디바이스 충전 확인 <span class="check-cn">· 儿童定位器 充电</span></label>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <input type="checkbox" id="c8">
+        <label for="c8">해양수족관 티켓 2매 확인 <span class="check-cn">· 上海海洋水族馆 门票 2张</span></label>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  上海 · 2026.04.10 – 04.13 · 날씨 출처: AccuWeather (4월 기준 예보) · 황사 발생 가능성 있음 · 마스크 권장
+</footer>
+
+<script>
+function toggleCheck(row) {
+  const cb = row.querySelector('input[type="checkbox"]');
+  const label = row.querySelector('label');
+  cb.checked = !cb.checked;
+  if (cb.checked) {
+    label.classList.add('done');
+  } else {
+    label.classList.remove('done');
+  }
+}
+</script>
+
+</body>
+</html>
