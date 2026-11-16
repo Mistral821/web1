@@ -1,128 +1,816 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 교원구몬 스승의날 선호도 조사</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts (Noto Sans KR) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Noto Sans KR', sans-serif;
-            background-color: #FAF9F6;
-        }
-        .fade-in {
-            animation: fadeIn 1s ease-out forwards;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .beige-gradient {
-            background: linear-gradient(135deg, #D4A373 0%, #A98467 100%);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>게로온천 · 나고야 — 2026.11.26~29 (v14)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F1EA; --paper:#FFFEFA; --ink:#1F2925; --moss:#40584D;
+    --teal:#176B68; --teal-soft:#DDEEEA; --amber:#CF7A3A; --amber-soft:#F8E8D8;
+    --plum:#80536A; --stone:#68736D; --line:#D9DDD5; --warn:#A64B34;
+    --shadow:0 12px 32px rgba(34,55,47,.08); --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  html,body{overflow-x:hidden}
+  body{
+    margin:0;background:var(--bg);color:var(--ink);
+    font-family:"IBM Plex Sans KR",system-ui,-apple-system,sans-serif;
+    font-weight:300;line-height:1.72;font-size:16px;
+  }
+  img,svg{max-width:100%}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px 96px}
+
+  /* hero */
+  .hero{margin-top:24px;padding:42px 38px 32px;border:1px solid rgba(23,107,104,.16);
+    border-radius:26px;background:
+    radial-gradient(circle at 88% 14%,rgba(207,122,58,.18),transparent 28%),
+    linear-gradient(135deg,#FFFEFA 0%,#EDF6F2 100%);box-shadow:var(--shadow)}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--stone);margin:0 0 16px}
+  h1{font-family:"Gowun Batang",serif;font-weight:700;
+    font-size:clamp(30px,6.4vw,48px);line-height:1.2;margin:0 0 12px;letter-spacing:-.01em}
+  h1 .sub{display:block;font-size:.42em;font-weight:400;color:var(--moss);margin-top:12px}
+  .facts{display:flex;flex-wrap:wrap;gap:6px 26px;font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;color:var(--moss);padding:16px 0 0;border-top:1px solid var(--line);margin-top:24px}
+  .facts b{font-weight:500;color:var(--ink)}
+  .quick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+  .quick-card{padding:13px 14px;border-radius:13px;background:rgba(255,255,255,.78);
+    border:1px solid rgba(23,107,104,.14);font-size:13px;color:var(--stone)}
+  .quick-card strong{display:block;margin-top:2px;color:var(--ink);font-size:14px;font-weight:600}
+
+  /* day nav */
+  nav.days{position:sticky;top:0;z-index:20;background:rgba(231,232,227,.94);
+    backdrop-filter:blur(8px);margin:26px -20px 0;padding:10px 20px;
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  nav.days a{flex:none;font-family:"IBM Plex Mono",monospace;font-size:12px;
+    text-decoration:none;color:var(--moss);border:1px solid var(--line);
+    background:var(--paper);min-height:42px;padding:9px 14px;border-radius:999px;white-space:nowrap;
+    display:inline-flex;align-items:center;box-shadow:0 2px 8px rgba(34,55,47,.04)}
+  nav.days a:hover,nav.days a:focus-visible{border-color:var(--teal);color:var(--teal)}
+
+  section{margin-top:48px;scroll-margin-top:64px}
+  h2.head{font-family:"Gowun Batang",serif;font-size:23px;font-weight:700;margin:0 0 6px}
+  .lede{color:var(--moss);font-size:14.5px;margin:0 0 20px}
+
+  /* map */
+  .mapbox{background:var(--paper);border:1px solid var(--line);padding:20px 16px 12px;margin-bottom:16px}
+  .mapbox h3{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--stone);font-weight:400;margin:0 0 12px}
+  .mp-node{font-family:"IBM Plex Sans KR",sans-serif;font-size:14px;font-weight:500;fill:var(--ink)}
+  .mp-sub{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--stone)}
+  .mp-dur{font-family:"IBM Plex Mono",monospace;font-size:11px;fill:var(--amber)}
+
+  /* day card */
+  .day{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    margin-bottom:20px;overflow:hidden;box-shadow:0 8px 22px rgba(34,55,47,.055)}
+  .day>header{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;
+    padding:16px 20px;border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(47,122,133,.08),transparent)}
+  .dn{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.12em;
+    color:var(--teal);font-weight:500}
+  .dt{font-family:"Gowun Batang",serif;font-size:20px;font-weight:700;margin:0;flex:1 1 auto}
+  .badge{font-family:"IBM Plex Mono",monospace;font-size:10.5px;border:1px solid var(--amber);
+    color:var(--amber);padding:2px 8px;border-radius:2px}
+
+  ol.steps{list-style:none;margin:0;padding:4px 0}
+  ol.steps li{display:grid;grid-template-columns:64px 1fr;gap:0 14px;
+    padding:12px 20px;border-bottom:1px dashed var(--line)}
+  ol.steps li:last-child{border-bottom:0}
+  .t{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--teal);
+    padding-top:3px;font-weight:500}
+  .t.mv{color:var(--stone);font-weight:400}
+  .what{margin:0;font-weight:400;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px}
+  .what a{color:var(--ink);text-decoration:none;border-bottom:1px solid var(--teal)}
+  .what a:hover,.what a:focus-visible{background:rgba(47,122,133,.12)}
+  .chip{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.06em;
+    padding:1px 6px;border-radius:2px;white-space:nowrap;position:relative;top:-1px}
+  .c-mv{background:rgba(123,130,122,.18);color:var(--stone)}
+  .c-eat{background:rgba(176,114,42,.16);color:var(--amber)}
+  .c-see{background:rgba(47,122,133,.14);color:var(--teal)}
+  .c-spa{background:rgba(124,74,99,.14);color:var(--plum)}
+  .c-buy{background:rgba(26,30,27,.10);color:var(--moss)}
+  .memo{margin:3px 0 0;font-size:13px;color:var(--stone);line-height:1.58}
+  .pick{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--plum);
+    border:1px solid var(--plum);padding:1px 5px;border-radius:2px}
+
+  .callout{border-left:3px solid var(--warn);background:#F6EDE8;padding:15px 18px;margin:16px 0}
+  .callout h3{margin:0 0 5px;font-size:14.5px;font-weight:600;color:var(--warn)}
+  .callout p{margin:0 0 5px;font-size:14px}
+  .callout p:last-child{margin-bottom:0}
+
+  .box{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);
+    padding:20px 22px;box-shadow:0 7px 20px rgba(34,55,47,.045)}
+  .box h3{font-family:"Gowun Batang",serif;font-size:17px;margin:0 0 9px}
+  .box+.box{margin-top:14px}
+  .box ul{margin:0;padding-left:17px}
+  .box li{margin-bottom:6px;font-size:14.5px}
+  .box li:last-child{margin-bottom:0}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+
+  ul.check{list-style:none;margin:0;padding:0}
+  ul.check li{display:flex;align-items:flex-start;gap:10px;padding:8px 0;
+    border-bottom:1px dashed var(--line);font-size:14.5px}
+  ul.check li:last-child{border-bottom:0}
+  ul.check input{margin:6px 0 0;width:16px;height:16px;flex:none;accent-color:var(--teal)}
+  ul.check label{cursor:pointer}
+  ul.check input:checked+label{color:var(--stone);text-decoration:line-through}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--warn);
+    border:1px solid var(--warn);padding:1px 5px;margin-left:5px;white-space:nowrap}
+
+  .tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th,td{text-align:left;padding:8px 9px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-family:"IBM Plex Mono",monospace;font-size:10.5px;letter-spacing:.09em;
+    text-transform:uppercase;color:var(--stone);font-weight:400}
+  td.num,th.num{font-family:"IBM Plex Mono",monospace;text-align:right;white-space:nowrap}
+  tr.sum td{border-top:2px solid var(--moss);border-bottom:0;font-weight:600;
+    font-size:15.5px;padding-top:12px}
+  tr.sum td.num{color:var(--warn)}
+  td small{display:block;font-size:12px;color:var(--stone);line-height:1.45;font-weight:300}
+
+  .links{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}
+  .links a{display:block;border:1px solid var(--line);background:var(--paper);
+    padding:10px 12px;text-decoration:none;color:var(--ink);font-size:14px}
+  .links a:hover,.links a:focus-visible{border-color:var(--teal);background:rgba(47,122,133,.07)}
+  .links a span{display:block;font-family:"IBM Plex Mono",monospace;font-size:10px;
+    color:var(--teal);letter-spacing:.07em;margin-bottom:2px}
+
+  .notebook-card{position:relative;overflow:hidden;margin:24px 0 4px;padding:26px;
+    border-radius:20px;color:#fff;background:linear-gradient(135deg,#176B68 0%,#28524C 72%,#403B50 100%);
+    box-shadow:0 16px 34px rgba(23,107,104,.2)}
+  .notebook-card:after{content:"?";position:absolute;right:18px;top:-42px;font-family:"Gowun Batang",serif;
+    font-size:180px;color:rgba(255,255,255,.07);font-weight:700}
+  .notebook-card h2{position:relative;margin:0 0 7px;font-family:"Gowun Batang",serif;font-size:24px}
+  .notebook-card p{position:relative;margin:0;color:rgba(255,255,255,.82);font-size:14px;max-width:560px}
+  .notebook-link{position:relative;display:inline-flex;align-items:center;justify-content:center;margin-top:16px;
+    min-height:48px;padding:11px 18px;border-radius:12px;background:#fff;color:var(--teal);
+    text-decoration:none;font-weight:600;box-shadow:0 7px 16px rgba(0,0,0,.14)}
+  .notebook-link:hover,.notebook-link:focus-visible{background:#FFF4E8;outline:3px solid rgba(255,255,255,.3)}
+  .guide-visual{margin-top:22px;background:var(--paper);border:1px solid var(--line);
+    border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
+  .guide-visual img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:contain;background:#EAF6F7}
+  .guide-visual figcaption{padding:14px 18px;color:var(--stone);font-size:13px;border-top:1px solid var(--line)}
+  .guide-visual figcaption strong{color:var(--ink);font-weight:600}
+
+  [data-go]{cursor:pointer}
+  [data-go]:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  footer{margin-top:52px;padding-top:20px;border-top:1px solid var(--line);
+    font-size:12.5px;color:var(--stone)}
+
+  @media (max-width:600px){
+    .wrap{padding:0 15px 66px}
+    .hero{margin-top:12px;padding:27px 20px 22px;border-radius:20px}
+    .quick{grid-template-columns:1fr;gap:7px}
+    nav.days{margin:22px -15px 0;padding:9px 15px}
+    ol.steps li{grid-template-columns:52px 1fr;gap:0 10px;padding:11px 14px}
+    .day>header{padding:14px}
+    .box{padding:16px;border-radius:15px}
+    .grid2,.links{grid-template-columns:1fr}
+    table{font-size:13.5px}
+    .memo{font-size:14px}
+    .notebook-card{padding:22px 18px;border-radius:16px}
+    .notebook-link{display:flex;width:100%}
+    .guide-visual{margin-top:16px;border-radius:15px}
+    .guide-visual figcaption{padding:12px 14px;font-size:12.5px}
+    td.num,th.num{white-space:normal}
+    table.stack,table.stack tbody,table.stack tr,table.stack th,table.stack td{display:block;width:100%}
+    table.stack tr:first-child{display:none}
+    table.stack tr{border:1px solid var(--line);padding:11px;margin-bottom:9px;background:#fff}
+    table.stack td{border:0;padding:3px 0;text-align:left}
+    table.stack td.num{text-align:left}
+    table.stack tr.sum{border:0;border-top:2px solid var(--moss);background:transparent;
+      padding:11px 0 0;margin-bottom:0}
+    table.stack td[data-label]::before{content:attr(data-label);display:block;
+      font-family:"IBM Plex Mono",monospace;font-size:10px;letter-spacing:.09em;
+      text-transform:uppercase;color:var(--stone);margin-bottom:2px}
+  }
+  /* v9 */
+  .t{word-break:keep-all;line-height:1.35}
+  .memo{font-size:14.5px;color:#4F5A54;line-height:1.62}
+  td small{font-size:13px;color:#56605A}
+  .callout p{font-size:14.5px}
+  .callout.ok{border-left-color:var(--teal);background:var(--teal-soft)}
+  .callout.ok h3{color:var(--teal)}
+  .mapscroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .mapscroll svg{display:block;min-width:620px}
+  .maphint{display:none;margin:6px 0 0;font-size:12.5px;color:var(--stone)}
+  .timeline{list-style:none;margin:0;padding:0}
+  .timeline li{display:grid;grid-template-columns:118px 1fr;gap:4px 14px;padding:12px 0;border-bottom:1px dashed var(--line)}
+  .timeline li:last-child{border-bottom:0}
+  .timeline .when{font-weight:600;color:var(--teal);font-size:14.5px}
+  .timeline .when.due{color:var(--warn)}
+  .timeline .what2{font-size:15px;font-weight:500;margin:0}
+  .timeline .why{font-size:14.5px;color:#4F5A54;margin:3px 0 0;line-height:1.6}
+  details.fold>summary{list-style:none;cursor:pointer;display:flex;align-items:baseline;gap:10px}
+  details.fold>summary::-webkit-details-marker{display:none}
+  details.fold>summary h2{margin:0 0 6px}
+  details.fold>summary .fold-hint{font-size:13px;color:var(--teal);border:1px solid var(--teal);border-radius:999px;padding:2px 10px;white-space:nowrap}
+  details.fold[open]>summary .fold-hint .closed,details.fold:not([open])>summary .fold-hint .opened{display:none}
+  details.fold>summary:focus-visible{outline:2px solid var(--teal);outline-offset:4px}
+  .guide-visual{margin:0 0 18px}
+  .guide-visual button.zoom{all:unset;display:block;width:100%;cursor:zoom-in}
+  .guide-visual button.zoom:focus-visible{outline:3px solid var(--teal);outline-offset:-3px}
+  .lightbox{position:fixed;inset:0;z-index:50;background:rgba(15,22,19,.92);display:none;overflow:auto;-webkit-overflow-scrolling:touch}
+  .lightbox.on{display:block}
+  .lightbox img{display:block;width:960px;max-width:none;margin:56px auto 24px}
+  .lightbox .close{position:fixed;top:12px;right:12px;min-width:48px;min-height:48px;border:0;border-radius:999px;background:#fff;color:var(--ink);font-size:15px;font-weight:600;cursor:pointer;padding:0 16px}
+  @media (min-width:980px){.lightbox img{width:min(960px,92vw)}}
+  @media (max-width:600px){
+    ol.steps li{grid-template-columns:58px 1fr}
+    .memo{font-size:15px}
+    .callout p{font-size:15px}
+    .maphint{display:block}
+    .timeline li{grid-template-columns:1fr;gap:2px}
+    table.stack td.na{display:none}
+  }
+
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  @media print{body{background:#fff}nav.days{display:none}.day,.box,.mapbox{break-inside:avoid}}
+/* v11: responsive dialog, status labels and print */
+.t{min-width:0;overflow-wrap:anywhere;word-break:normal}.confirmed{flex:none;font-size:11px;color:var(--teal);border:1px solid var(--teal);border-radius:5px;padding:2px 5px;margin-top:3px}.booking-text{min-width:0}#reset-checks,.lb-tools button{min-height:44px;padding:8px 14px;border:1px solid var(--teal);border-radius:10px;background:var(--paper);color:var(--teal);cursor:pointer;font:inherit}#reset-checks{margin-top:10px}.lb-tools{position:sticky;top:0;z-index:2;display:flex;justify-content:flex-end;gap:8px;padding:10px;background:#15241e}.lightbox .close{position:static}.lightbox img{width:min(960px,100%);max-width:100%;height:auto;margin:10px auto 24px}.lightbox.full-size img{width:960px;max-width:none;margin-left:0}.lightbox .scale{font-size:15px}.lightbox.on{overscroll-behavior:contain}nav.days a[aria-current="location"]{background:var(--teal);color:white}.box p,.box li{overflow-wrap:anywhere}ul.check label{min-height:44px}.save-failed{color:var(--warn)}
+@media print{.lightbox,.guide-visual button,.notebook-card,#reset-checks,#save-status{display:none!important}details.fold>summary .fold-hint{display:none}.wrap{max-width:none;padding:0}.box{box-shadow:none}a{color:inherit}section{margin-top:24px}}
+
+/* v13 · an autumn travel journal */
+:root{--bg:#eeebe3;--paper:#fbf8f0;--ink:#283c48;--moss:#405662;--teal:#314f60;--teal-soft:#e8ece9;--amber:#986532;--amber-soft:#f3e8d5;--plum:#796277;--stone:#637078;--line:#d9d5c9;--warn:#a84333;--radius:3px;--shadow:none}
+body{background-color:var(--bg);background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23827c69' opacity='.055' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");font-weight:400;line-height:1.8}
+.wrap{max-width:1100px;padding:0 40px 80px}
+.hero{position:relative;margin-top:36px;padding:26px 36px 0;border:1px solid #c9c3b3;border-radius:3px;background:var(--paper);box-shadow:0 8px 22px #283c4808;overflow:hidden}
+.cover-top{display:flex;align-items:center;gap:16px;padding-bottom:18px;border-bottom:1px solid var(--line);font-size:11px;letter-spacing:.15em;color:var(--stone)}
+.cover-top>span:first-child{font-family:'Gowun Batang',serif;font-size:16px;letter-spacing:.2em;color:var(--ink)}
+.cover-top>span:nth-child(2){flex:1;text-align:right;font-family:'IBM Plex Mono',monospace;font-size:9px}
+.seal{display:grid;place-items:center;flex:none;width:36px;height:39px;border:1.5px solid var(--warn);color:var(--warn);font-family:serif;font-size:13px;letter-spacing:.1em;transform:rotate(-5deg);border-radius:2px}
+.cover-layout{display:grid;grid-template-columns:1.08fr 1fr;align-items:center;gap:12px;padding:32px 0 14px}
+.eyebrow{font-size:11px;letter-spacing:.05em;color:var(--warn);margin-bottom:24px}
+h1{font-size:clamp(38px,5.7vw,60px);line-height:1.25;letter-spacing:-.06em;margin:0;font-weight:400}
+.title-join{display:block;font-size:15px;letter-spacing:.3em;color:var(--stone);margin:8px 0 9px 3px}
+h1 .sub{font-family:'IBM Plex Sans KR',sans-serif;font-size:13px;font-weight:400;line-height:1.9;letter-spacing:0;max-width:295px;margin-top:24px;color:var(--stone)}
+.cover-art{display:block;width:100%;height:auto}
+.cover-caption{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:12px 0;font-family:'Gowun Batang',serif;color:var(--stone);font-size:12px}
+.cover-caption span:last-child{letter-spacing:.2em;white-space:nowrap}
+.facts{margin:0;padding:15px 0;gap:5px 22px;font-family:inherit;font-size:11px;border-top:1px solid var(--line)}
+.quick{margin:0 -36px;gap:0;border-top:1px solid var(--line);background:#e8e8df}
+.quick-card{border:0;border-right:1px solid #d1d3c8;border-radius:0;background:transparent;padding:16px 22px;color:var(--stone);font-size:11px}
+.quick-card:last-child{border-right:0}.quick-card strong{font-size:13px;margin-top:4px;font-weight:500}
+nav.days{margin:22px 0 0;padding:0 4px;background:#eeebe3f5;gap:1px;border-top:1px solid #c4c4b9;border-bottom:1px solid #c4c4b9;scrollbar-width:thin}
+nav.days a{font-family:inherit;font-size:12px;border:0;border-radius:0;padding:14px 15px;min-height:50px;background:transparent;box-shadow:none;color:var(--moss);border-bottom:2px solid transparent}
+nav.days a:hover,nav.days a:focus-visible{background:#e2e4dd;border-bottom-color:var(--teal)}
+nav.days a[aria-current='location']{background:transparent;color:var(--warn);border-bottom-color:var(--warn);font-weight:600}
+section{margin-top:52px}h2.head{font-size:26px;font-weight:400;letter-spacing:-.04em;margin-bottom:10px}.lede{font-size:13px;line-height:1.85;color:var(--stone);margin-bottom:24px}
+.box,.mapbox{border-radius:2px;box-shadow:none;border-color:var(--line);background:var(--paper);padding:24px}.box h3{font-weight:700;font-size:18px}.box li{font-size:14px;line-height:1.9}
+.day{border-radius:3px;box-shadow:none;margin-bottom:32px;border-color:#ccc9be;position:relative}
+.day>header{padding:24px 28px;background:#f3f0e7;gap:10px 24px;align-items:center;border-bottom:1px solid #ccc9be;position:relative}
+.day>header:before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--teal)}
+.dn{display:flex;align-items:center;gap:14px;letter-spacing:0;color:var(--teal);flex:none}.day-number{font-family:'Gowun Batang',serif;font-size:51px;line-height:1;font-weight:400}.day-date{font-size:10px;line-height:1.9;letter-spacing:.04em}
+.dt{font-size:22px;line-height:1.65;flex:1 1 350px;font-weight:400;letter-spacing:-.03em}.badge{border:0;background:#e6e6dc;color:var(--moss);font-family:inherit;font-size:10px;padding:4px 9px;border-radius:2px}
+ol.steps{padding:10px 0}ol.steps li{grid-template-columns:90px minmax(0,1fr);gap:0 24px;padding:18px 28px;border-bottom:1px solid #e8e4da;position:relative}
+ol.steps li:before{content:'';position:absolute;left:130px;top:24px;width:5px;height:5px;background:#a8b2ad;border-radius:50%}
+.t{color:var(--teal);font-size:13px;line-height:1.65;padding-top:1px}.what{font-size:16px;font-weight:500;line-height:1.7;gap:4px 8px}.memo{font-size:13px;line-height:1.9;color:#626b70;margin-top:7px}.memo strong{color:var(--moss);font-weight:500}.reserved-step{background:#edf0e9}.reserved-step .t{color:var(--warn);font-weight:500}.reserved-step:before{background:var(--warn)}
+.chip,.pick{font-family:inherit;font-size:10px;letter-spacing:0;padding:2px 6px;border-radius:2px;top:0}.c-eat{background:#efe3d0}.c-mv{background:#e7e9e5}.c-see{background:#e0e9e7}.c-spa{background:#ece2e7}.c-buy{background:#e6e4db}
+.callout{background:#f3e9df;border-left:2px solid var(--warn);padding:20px 22px}.callout p{font-size:13px;line-height:1.9}.callout h3{font-size:14px}.callout.ok{background:#e6ebe6;border-left-color:var(--teal)}
+th{font-family:inherit;font-size:11px;letter-spacing:.04em}th,td{padding:14px 12px}table{font-size:13px;line-height:1.85}td small{font-size:12px;color:var(--stone)}tr.sum td{font-size:14px}td.num,th.num{font-size:12px}
+.links{gap:10px}.links a{padding:14px 16px;font-size:13px;border-radius:2px}.links a span{font-size:10px}.timeline li{padding:17px 0}.timeline .when{font-family:'IBM Plex Mono',monospace;font-size:12px}.timeline .what2{font-size:14px}.timeline .why{font-size:13px;line-height:1.9;color:var(--stone)}
+ul.check li{font-size:13px;padding:12px 0;border-bottom-style:solid}.confirmed{border-radius:2px;font-size:10px;background:#edf0e9}.tag{font-family:inherit;border-radius:2px;font-size:10px}
+details.fold>summary{justify-content:space-between;align-items:center;padding:16px 0;border-top:1px solid #c4c4b9;gap:12px}details.fold>summary h2{font-size:23px;margin:0}details.fold>summary .fold-hint{font-size:11px;border:0;border-radius:0;padding:5px 0;color:var(--stone)}details.fold[open]>summary{margin-bottom:12px}
+.notebook-card{background:#2e4958;box-shadow:none;border-radius:2px;padding:28px 30px}.notebook-card h2{font-weight:400}.notebook-card p{font-size:13px;line-height:1.9}.notebook-card:after{content:'旅';top:-12px;font-size:150px}.notebook-link{border-radius:2px;box-shadow:none;font-size:13px;min-height:44px}.guide-visual{border-radius:2px;box-shadow:none}.guide-visual figcaption{font-size:12px;line-height:1.8}
+#reset-checks,.lb-tools button{border-radius:2px;font-size:12px}.lb-tools{background:#243b47}.lightbox{background:#172b35f5}footer{font-size:11px;line-height:1.9;border-color:#c4c4b9}
+@media(min-width:760px){#at-a-glance .box{padding:0}#at-a-glance td:first-child{width:14%}#at-a-glance td:nth-child(2){width:46%}#at-a-glance td:nth-child(3){width:20%}#at-a-glance td:last-child{width:20%}#at-a-glance tr:last-child td{border-bottom:0}}
+@media(max-width:760px){.wrap{padding:0 18px 60px}.hero{margin-top:18px;padding:18px 22px 0}.cover-top{gap:8px}.cover-top>span:nth-child(2){font-size:8px;letter-spacing:.06em}.cover-layout{grid-template-columns:1fr 1fr;gap:0;padding:28px 0 16px}.eyebrow{font-size:9px;margin-bottom:18px}h1{font-size:40px}.title-join{font-size:12px}h1 .sub{font-size:11px;line-height:1.9;margin-top:18px}.cover-art{width:115%;max-width:115%;margin-left:-5%}.quick{margin:0 -22px}.quick-card{padding:14px 16px}.quick-card strong{font-size:11px}.cover-caption{font-size:10px}.facts{font-size:10px}nav.days{margin:18px -18px 0;padding:0 13px}nav.days a{padding:13px 12px;font-size:11px;min-height:48px}section{margin-top:38px}.day>header{padding:20px;gap:10px 18px}.dt{font-size:21px;flex-basis:240px}.badge{font-size:10px}.day-number{font-size:45px}.box,.mapbox{padding:18px}.grid2{gap:14px}ol.steps li{grid-template-columns:67px minmax(0,1fr);gap:0 15px;padding:17px 19px}ol.steps li:before{left:91px;top:25px;width:4px;height:4px}.t{font-size:11px}.what{font-size:15px}.memo{font-size:13px;line-height:1.9}h2.head{font-size:24px}.lede{font-size:12px}.callout{padding:17px 18px}.callout p{font-size:13px}details.fold>summary h2{font-size:21px}.timeline .when{font-size:12px}table.stack td.num{font-size:13px}}
+@media(max-width:600px){.quick{grid-template-columns:1fr 1fr 1fr;gap:0}.quick-card{padding:12px 10px;font-size:9px}.quick-card strong{font-size:11px;line-height:1.8}.cover-top>span:first-child{font-size:13px}.seal{width:30px;height:33px;font-size:11px}.cover-layout{position:relative;grid-template-columns:1fr;padding-top:26px;padding-bottom:22px}.cover-copy{position:relative;z-index:1;width:68%}.cover-art{position:absolute;right:-36px;bottom:17px;width:67%;max-width:67%;opacity:.87;z-index:0}.eyebrow{white-space:nowrap}h1{font-size:44px}h1 .sub{max-width:175px;background:linear-gradient(90deg,#fbf8f0 65%,#fbf8f000);padding-right:8px}.title-join{margin-top:7px;margin-bottom:8px}.cover-caption{font-size:9px}.cover-caption span:first-child{font-size:10px}.facts{padding:12px 0;gap:3px 12px}.facts>span:first-child{flex-basis:100%}.day>header{align-items:center;padding:18px}.dn{gap:11px}.dt{flex-basis:100%;order:2;font-size:21px}.badge{margin-left:auto;max-width:53%;font-size:9px}.day{margin-bottom:24px}.day>header:before{width:3px}.box{border-radius:2px}table.stack tr{background:var(--paper);border:0;border-bottom:1px solid var(--line);margin:0;padding:15px 0}table.stack tr:last-child{border-bottom:0}table.stack td{padding:4px 0;font-size:13px}table.stack td[data-label]::before{font-family:inherit;font-size:10px;letter-spacing:0;color:#7b7b72}#at-a-glance .box{padding:0 18px}#at-a-glance td:first-child{display:flex;align-items:center;gap:12px;border-bottom:1px solid #e9e5da;margin-bottom:7px;padding-bottom:10px}#at-a-glance td:first-child:before{display:none}#at-a-glance td:first-child a{font-family:'Gowun Batang',serif;font-size:20px;border:0!important}#at-a-glance td:first-child small{font-size:10px}.notebook-card{padding:24px 20px}.notebook-card h2{font-size:21px}.timeline li{grid-template-columns:1fr}.links{grid-template-columns:1fr}.maphint{font-size:11px}}
+@media(max-width:360px){.wrap{padding-left:14px;padding-right:14px}.hero{padding-left:18px;padding-right:18px}.cover-top>span:nth-child(2){font-size:7px}.cover-art{right:-31px}.cover-caption{gap:4px}.cover-caption span:first-child{font-size:9px}.quick{margin-left:-18px;margin-right:-18px}.quick-card{font-size:8px;padding:10px 8px}.quick-card strong{font-size:10px}h1{font-size:40px}ol.steps li{padding-left:14px;padding-right:14px;grid-template-columns:60px minmax(0,1fr);gap:0 14px}ol.steps li:before{left:78px}.memo{font-size:12px}.what{font-size:14px}.badge{max-width:50%}nav.days{margin-left:-14px;margin-right:-14px}}
+@media print{body{background:#fff}.hero{margin-top:0;box-shadow:none}.cover-layout{grid-template-columns:1fr 1fr}.cover-art{position:static;width:100%;max-width:100%}.cover-copy{width:auto}.day>header,.reserved-step,.quick{-webkit-print-color-adjust:exact;print-color-adjust:exact}.wrap{max-width:none;padding:0}nav.days{display:none}ol.steps li{break-inside:avoid}.day{break-inside:auto}.day>header{break-after:avoid}.box{break-inside:auto}section{margin-top:28px}}
+
+</style>
 </head>
-<body class="text-[#4A443F]">
+<body>
+<div class="wrap">
 
-    <!-- Header -->
-    <nav class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-[#F0EAE0]">
-        <div class="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#D4A373" stroke="#D4A373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-                <span class="font-bold tracking-tight text-lg text-[#A98467]">교원구몬 <span class="text-[#D4A373] font-medium ml-1">| 스승의날</span></span>
-            </div>
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium opacity-70">
-                <span class="cursor-pointer hover:text-[#D4A373] transition-colors">조사 개요</span>
-                <span class="cursor-pointer hover:text-[#D4A373] transition-colors">선물 구성</span>
-                <span class="cursor-pointer hover:text-[#D4A373] transition-colors">문의처</span>
-            </div>
-        </div>
-    </nav>
+  <div class="hero"><div class="cover-top"><span>家族の旅</span><span>FAMILY TRAVEL JOURNAL · 2026</span><span class="seal">秋旅</span></div><div class="cover-layout"><div class="cover-copy">
+    <p class="eyebrow">2026 · 11/26 목 ~ 11/29 일 · 3박 4일</p>
+    <h1>게로온천<span class="title-join">그리고</span>나고야
+      <span class="sub">온천에서 쉬고, 옛 성을 걷고, 도시의 맛을 함께 나누는 가족여행</span>
+    </h1>
+    </div><svg class="cover-art" viewBox="0 0 480 370" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+<defs><pattern id="water-lines" width="46" height="18" patternUnits="userSpaceOnUse"><path d="M-12 10Q0 0 12 10T36 10T60 10" stroke="#657e8b" stroke-width=".8" opacity=".4"/></pattern></defs>
+<circle cx="345" cy="100" r="54" fill="#ad4334" opacity=".9"/>
+<path d="M0 222 85 93 177 212 252 131 361 240 441 160 480 205V310H0Z" fill="#d1d2c1"/>
+<path d="m0 249 89-94 72 76 95-42 77 72 87-49 60 40v70H0Z" fill="#87978d"/>
+<path d="M0 280Q102 245 204 278T480 264V370H0Z" fill="#e3e6df"/>
+<path d="M0 280Q102 245 204 278T480 264V370H0Z" fill="url(#water-lines)"/>
+<path d="M61 265h151v44H61z" fill="#f4eddf" stroke="#334c57" stroke-width="2"/>
+<path d="m43 265 94-49 94 49Z" fill="#334c57"/><path d="m62 251 75-38 75 38" stroke="#334c57" stroke-width="3"/>
+<path d="M80 279h16v19H80zm30 0h16v19h-16zm38 0h16v30h-16zm31 0h16v19h-16z" fill="#a98760"/>
+<path d="M117 207c-15-15 14-20 0-36m21 36c-15-15 14-20 0-36m21 36c-15-15 14-20 0-36" stroke="#f8f3e8" stroke-width="3" stroke-linecap="round"/>
+<path d="M335 285h72v15h-72zm8-15h56v15h-56zm7-17h42v17h-42z" fill="#f4eddf" stroke="#334c57" stroke-width="1.5"/>
+<path d="m325 286 46-12 46 12m-82-15 36-13 36 13m-66-17 30-17 30 17" stroke="#334c57" stroke-width="5" stroke-linecap="round"/>
+<path d="M431 23c-1 46-12 84-39 124m31-67 42-20m-49 43-37-14" stroke="#796f5e" stroke-width="1.5"/>
+<g fill="#ad4334"><path d="m435 49-12-8 3 12-15 3 14 7-3 12 11-8 11 6-2-14 10-7-15 1z"/><path d="m397 98-10-7 2 10-13 3 12 6-2 10 9-7 10 5-2-12 9-6-13 1z"/><path d="m458 58-8-5 2 8-10 2 9 4-2 8 7-5 7 4-1-9 7-5-10 1z"/></g>
+<path d="M25 342h430" stroke="#334c57" opacity=".25"/><text x="25" y="362" fill="#334c57" font-family="serif" font-size="10" letter-spacing="4">GERO → NAGOYA · LATE AUTUMN</text>
+</svg></div><div class="cover-caption"><span>온천의 온기에서 도시의 풍경까지</span><span>下呂 · 名古屋</span></div><div class="facts">
+      <span><b>6명</b> · 어머니 · 아버지 · 나 · 동생 부부 · 조카</span>
+      <span>항공 · 숙소 · 히다 왕복 <b>예약 확인</b></span>
+      <span>숙소 변경 <b>1회</b></span>
+    </div>
+    <div class="quick" aria-label="여행 핵심 정보">
+      <div class="quick-card">가는 비행기<strong>11/26 07:30 · 인천 T2</strong></div>
+      <div class="quick-card">첫날 숙소<strong>게로온천 스이메이칸</strong></div>
+      <div class="quick-card">돌아오는 비행기<strong>11/29 20:00 · 센트레아 T1</strong></div>
+    </div>
+  </div>
 
-    <!-- Main Section -->
-    <main class="pt-32 pb-20 px-6 max-w-4xl mx-auto fade-in">
-        <!-- Hero Section -->
-        <div class="text-center mb-16">
-            <div class="inline-block px-4 py-1 rounded-full bg-[#F5EBE0] text-[#D4A373] text-sm font-semibold mb-4">
-                2026 교원구몬 스승의날 캠페인
-            </div>
-            <h1 class="text-4xl md:text-5xl font-bold leading-tight mb-6">
-                감사의 마음을 전하는<br />
-                <span class="text-[#A98467]">가장 따뜻한 방법</span>
-            </h1>
-            <p class="text-lg text-[#8D8173] max-w-2xl mx-auto leading-relaxed">
-                다가오는 2026년 스승의날을 맞아, 교원구몬 임직원 여러분들의 소중한 의견을 듣고자 합니다. 
-                우리의 진심이 잘 전달될 수 있도록 선호하시는 선물 구성을 선택해 주세요.
-            </p>
-        </div>
+  <nav class="days">
+    <a href="#at-a-glance" data-go="at-a-glance" role="link" tabindex="0">한눈에</a>
+    <a href="#d1" data-go="d1" role="link" tabindex="0">11/26 게로</a>
+    <a href="#d2" data-go="d2" role="link" tabindex="0">11/27 나고야</a>
+    <a href="#d3" data-go="d3" role="link" tabindex="0">11/28 이누야마</a>
+    <a href="#d4" data-go="d4" role="link" tabindex="0">11/29 출국</a>
+    <a href="#maps" data-go="maps" role="link" tabindex="0">지도</a>
+    <a href="#book" data-go="book" role="link" tabindex="0">예약</a>
+    <a href="#todo" data-go="todo" role="link" tabindex="0">할 일</a>
+    <a href="#cost" data-go="cost" role="link" tabindex="0">비용</a>
+    <a href="#encyclopedia" data-go="encyclopedia" role="link" tabindex="0">여행 백과</a>
+  </nav>
 
-        <!-- Feature Cards -->
-        <div class="grid md:grid-cols-3 gap-6 mb-16">
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#F0EAE0] hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-[#FEFAE0] rounded-2xl flex items-center justify-center mb-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#D4A373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v10H4V12"/><path d="m2 7 2.88 4h14.24L22 7H2Z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7Z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7Z"/></svg>
-                </div>
-                <h3 class="font-bold text-xl mb-3">최적의 구성</h3>
-                <p class="text-[#8D8173] text-sm leading-relaxed">
-                    교원구몬의 품격에 맞는 가장 실용적인 선물을 선정하기 위해 선호도를 파악합니다.
-                </p>
-            </div>
-            
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#F0EAE0] hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-[#F5EBE0] rounded-2xl flex items-center justify-center mb-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#A98467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 11 3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-                </div>
-                <h3 class="font-bold text-xl mb-3">간편한 참여</h3>
-                <p class="text-[#8D8173] text-sm leading-relaxed">
-                    네이버 폼을 통해 1분 내외로 간편하게 설문에 참여하실 수 있습니다.
-                </p>
-            </div>
 
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-[#F0EAE0] hover:shadow-md transition-shadow">
-                <div class="w-12 h-12 bg-[#E9EDC9] rounded-2xl flex items-center justify-center mb-6">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#606C38" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-                </div>
-                <h3 class="font-bold text-xl mb-3">의견 수렴</h3>
-                <p class="text-[#8D8173] text-sm leading-relaxed">
-                    남겨주시는 추가 코멘트는 교원구몬의 향후 행사 기획에 소중히 활용됩니다.
-                </p>
-            </div>
-        </div>
 
-        <!-- CTA Box -->
-        <div class="relative beige-gradient rounded-[2.5rem] p-8 md:p-12 overflow-hidden shadow-xl text-white">
-            <div class="absolute top-[-10%] right-[-5%] w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-            <div class="absolute bottom-[-10%] left-[-5%] w-48 h-48 bg-black/5 rounded-full blur-2xl"></div>
-            
-            <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-                <div class="text-center md:text-left">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-3">선호도 조사 바로가기</h2>
-                    <p class="text-white/80">
-                        설문 기간: 2026.01.30(금) ~ 02.04(수) 까지
-                    </p>
-                </div>
-                <a href="https://naver.me/GVEU4dSP" target="_blank" rel="noopener noreferrer" 
-                   class="group bg-white text-[#D4A373] px-8 py-4 rounded-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 transition-all shadow-lg active:scale-95 no-underline">
-                    설문 참여하기
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-                </a>
-            </div>
-        </div>
+  <!-- ================= MAP ================= -->
+  <section id="at-a-glance">
+    <h2 class="head">네 번의 아침, 하나의 여행</h2>
+    <p class="lede">예약 메일 대조: 2026.10.27 · 성인 5명 + 초등학생 1명. 시각은 교통편 외에는 이동 목표입니다.</p>
+    <div class="box">
+      <div class="tablewrap"><table class="stack">
+        <tr><th>날짜</th><th>낮</th><th>저녁</th><th>잠</th></tr>
+        <tr>
+          <td data-label="날짜"><a href="#d1" data-go="d1" role="link" tabindex="0" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--teal)"><strong>11/26 목</strong></a><small>도착일</small></td>
+          <td data-label="낮">07:30 인천 T2 출발 → 09:30 나고야<br>12:48 특급 히다 → 게로 · 온천가 산책</td>
+          <td data-label="저녁">온천 상점가</td>
+          <td data-label="잠"><strong>스이메이칸</strong></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><a href="#d2" data-go="d2" role="link" tabindex="0" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--teal)"><strong>11/27 금</strong></a></td>
+          <td data-label="낮">아침 온천 · 자유시간 · 밤과자<br>나고야 이동 · 늦은 점심 · 체크인 · 휴식 · 오스</td>
+          <td data-label="저녁"><strong>18:30 체자리</strong><br><small>6명 예약 완료</small></td>
+          <td data-label="잠"><strong>Kagetu-HANA</strong></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><a href="#d3" data-go="d3" role="link" tabindex="0" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--teal)"><strong>11/28 토</strong></a><small>가장 바쁜 날</small></td>
+          <td data-label="낮">이누야마 — 성 외관 · 신사 · 조카마치<br>11:30 이른 점심 · 사카에 쇼핑</td>
+          <td data-label="저녁">무나기 히츠마부시</td>
+          <td data-label="잠"><strong>Kagetu-HANA</strong></td>
+        </tr>
+        <tr>
+          <td data-label="날짜"><a href="#d4" data-go="d4" role="link" tabindex="0" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--teal)"><strong>11/29 일</strong></a><small>출국일</small></td>
+          <td data-label="낮">윙크 아이치 공항 배송 · <strong>09:30 버미큘라 모닝 확정</strong><br>아쓰타신궁 · 나고야항 수족관</td>
+          <td data-label="저녁">센트레아 T1</td>
+          <td data-label="잠">20:00 출국 → 22:15 인천</td>
+        </tr>
+      </table></div>
+    </div>
+  </section>
 
-        <!-- Footer Info -->
-        <div class="mt-16 text-center text-sm text-[#8D8173] opacity-60">
-            <p>&copy; 2026 교원구몬. All rights reserved.</p>
-            <p class="mt-1 italic">본 설문은 익명으로 진행되며, 통계 목적으로만 사용됩니다.</p>
-        </div>
-    </main>
+  <section id="plan">
+    <h2 class="head">날짜별 여행 수첩</h2>
+    <p class="lede">관광 시각은 목표이며, 예약 열차·식당 시각은 고정입니다. 지연되면 선택 관광을 줄이세요.<br>
+      <span class="chip c-mv">이동</span> <span class="chip c-see">관광</span>
+      <span class="chip c-eat">식사</span> <span class="chip c-spa">온천</span>
+      <span class="chip c-buy">쇼핑</span> · <span class="pick">찜</span>은 저장해두신 장소입니다.
+    </p>
 
-    <!-- Background Decoration -->
-    <div class="fixed bottom-10 right-10 z-[-1] opacity-5 pointer-events-none">
-        <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 24 24" fill="#D4A373" stroke="#D4A373" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+    <!-- DAY 1 -->
+    <article class="day" id="d1">
+      <header>
+        <span class="dn"><span class="day-number">01</span><span class="day-date">DAY 1<br>11/26 목</span></span>
+        <h3 class="dt">도착 당일, 바로 게로로</h3>
+        <span class="badge">게로 · 기온은 출발 전 확인</span>
+      </header>
+      <ol class="steps">
+<li><span class="t">09:30</span><div><p class="what">센트레아 T1 도착</p><p class="memo">진에어 <strong>LJ289</strong> · 입국·수하물 수령 시간은 변동됩니다. 40분 만의 완료를 전제로 하지 않습니다.</p></div></li>
+<li><span class="t">10:20 이후</span><div><p class="what">뮤스카이 → 메이테쓰 나고야역</p><p class="memo">수속 후 탈 수 있는 실제 열차를 선택합니다. 기본 운임과 특별차 지정권은 별도이며 전 좌석 지정제입니다. 늦어지면 점심·이누야마 발권을 줄이고 12:48 히다 탑승을 우선하세요.</p></div></li>
+<li><span class="t">도착 후</span><div><p class="what">JR 나고야역 — 히다 왕복 표 수령</p><p class="memo"><strong>왕복 예약·결제 완료.</strong> 개찰구 밖 JR-WEST 수령 지원 발권기·창구 이용. <strong>실물 결제 카드 + 예약번호 + 인증번호 4자리</strong>를 준비하세요. 국제 JR-WEST 예약 메일 기준입니다. 귀환편도 함께 수령 가능한지 창구에서 확인하세요.</p></div></li>
+<li><span class="t">시간 여유 시</span><div><p class="what">11/28 이누야마 왕복 특별차 지정권 구매</p><p class="memo">정확한 출발·도착 시각과 6석을 확인합니다. 08:00 숙소 출발과 맞는 열차를 선택하고, 급하면 온라인 또는 다음 날 구매로 넘기세요. 기본 운임 별도 · 창구/발권기 450엔, 이누야마 구간 온라인 할인 조건 충족 시 300엔(어린이 동일).</p></div></li>
+<li><span class="t">11:15 목표</span><div><p class="what">나고야역 점심 — 덴푸라 기시멘 다몬</p><p class="memo">아버지가 기대하신 <strong>우동·튀김</strong>을 첫 끼로. 대나고야빌딩 지하 1층, 11:00 오픈(방문 전 영업 확인). 6명과 캐리어 수용이 어렵거나 대기가 길면 에키카마 기시멘·도시락으로 바꾸고 <strong>12:30 승강장 도착</strong>을 우선합니다.</p></div></li>
+<li class="reserved-step"><span class="t">12:48</span><div><p class="what">특급 히다 11호 → 게로</p><p class="memo"><strong>8호차 13·14·15번 A/B석 · 성인 5 + 어린이 1 · 25,840엔 결제 완료.</strong> 승차권과 특급권 포함. 기후에서 진행방향이 바뀝니다. 좌석 방향·짐 보관 위치는 현장 안내를 따르고 통로·출입문을 막지 마세요.</p></div></li>
+<li><span class="t">14:28</span><div><p class="what">게로 도착 → 스이메이칸</p><p class="memo">역에서 도보 약 3분. 예약 메일상 <strong>체크인 14:00 / 체크아웃 다음 날 11:00</strong>. 객실 2개·조식 포함. Sansuikaku 또는 Hisenkaku 유형이며, 관별 1실이나 인접 객실은 확정되지 않았습니다.</p></div></li>
+<li><span class="t">15:00</span><div><p class="what">온천가 산책</p><p class="memo">히다강변과 온천가를 체력에 맞춰 약 1시간. 단풍·일몰·기온은 당일 조건에 따라 달라집니다.</p></div></li>
+<li><span class="t">16:15</span><div><p class="what">온천 · 수영(선택)</p><p class="memo">부모님은 온천에서 휴식. 수영장은 <strong>당일 운영·요금·아동 이용·타월·수영모 조건을 숙소에 확인한 뒤</strong> 이용하세요. 기존 9:00~21:30·성인 1,000엔·초등학생 500엔·횟수 무제한 정보는 재확인 전 참고값입니다.</p></div></li>
+<li><span class="t">18:00</span><div><p class="what">華甲園 下呂店 — 저녁 후보</p><p class="memo">공식 저녁 영업 17:00~24:00(마지막 주문 23:30). 6명 좌석은 미확보이므로 방문 전 확인하세요. 遊雅는 관광 안내상 점심 영업으로 나와 저녁 기본 후보에서 제외했습니다.</p></div></li>
+</ol>
+    </article>
+
+    <!-- DAY 2 -->
+    <article class="day" id="d2">
+      <header>
+        <span class="dn"><span class="day-number">02</span><span class="day-date">DAY 2<br>11/27 금</span></span>
+        <h3 class="dt">아침 온천에서 나고야로, 체자리 저녁</h3>
+        <span class="badge">나고야 · 기온은 출발 전 확인</span>
+      </header>
+      <ol class="steps">
+<li><span class="t">07:00</span><div><p class="what">아침 온천 · 조식</p><p class="memo">조식 시작·아동 포함 여부는 숙소 안내를 확인하세요. 전날과 다른 온천을 즐기거나 객실에서 쉽니다.</p></div></li>
+<li><span class="t">09:00</span><div><p class="what">자유시간</p><p class="memo">강변 산책·족욕·휴식 중 선택. 수영장 재이용은 운영 조건을 확인한 경우에만.</p></div></li>
+<li><span class="t">10:40</span><div><p class="what">체크아웃</p><p class="memo">공식 체크아웃 11:00. 캐리어와 귀환편 승차권을 챙기세요.</p></div></li>
+<li><span class="t">11:00</span><div><p class="what">니타로 게로역앞점 — 밤과자</p><p class="memo">공식 금요일 영업 9:00~17:30. 구리코모치는 당일 먹을 만큼 사고 소비기한을 포장으로 확인하세요. 품절 여부는 당일 확인합니다.</p></div></li>
+<li class="reserved-step"><span class="t">12:22</span><div><p class="what">특급 히다 8호 → 나고야</p><p class="memo"><strong>8호차 11·12·13번 A/B석 · 성인 5 + 어린이 1 · 26,940엔 결제 완료.</strong> 14:04 도착. 아침부터 점심까지 길어 간식을 준비하세요. 강을 보는 방향은 좌석 방향에 따라 확인합니다.</p></div></li>
+<li><span class="t">14:04</span><div><p class="what">JR 나고야역 도착</p><p class="memo">짐과 함께 식당까지 이동하는 시간·엘리베이터 대기까지 고려합니다.</p></div></li>
+<li><span class="t">14:20<br>~15:00</span><div><p class="what">늦은 점심</p><p class="memo">기시멘·우동 등 간단식. 6명과 캐리어를 받을 수 있는 곳을 선택하고 대기가 길면 포장합니다. 호스트의 무료 짐 보관은 <strong>사전 협의 후</strong> 이용 가능하나 보관처까지 왕복하는 시간도 계산하세요.</p></div></li>
+<li><span class="t">15:30 목표</span><div><p class="what">카나리야 레지던스 — 열쇠 수령 · 체크인</p><p class="memo">예약 체크인은 15:00 이후. 도착 시간을 호스트에게 미리 전달하세요. 15시 전 입실은 준비 가능한 경우에 한해 사전 예약·3,000엔 추가입니다. 짐 보관과 조기 입실은 별도입니다.</p></div></li>
+<li><span class="t">15:45<br>~16:45</span><div><p class="what">숙소 휴식</p><p class="memo">부모님·조카의 휴식을 우선하는 고정 시간입니다.</p></div></li>
+<li><span class="t">17:00</span><div><p class="what">오스 이동 · 가벼운 산책</p><p class="memo">체자리 근처에서 짧게 산책하고 18:15까지 식당으로 이동하세요. 워해머·Kapital은 해당 지점 영업·휴게시간을 확인한 경우에만 방문합니다.</p></div></li>
+<li><span class="t">18:30</span><div><p class="what">피체리아 브라체리아 체자리!! — 저녁</p><p class="memo"><strong>예약 메일 확인: 성인 5 + 어린이 1 · 금연 테이블 · 좌석만 예약.</strong> 음식은 현장 주문·현장 결제합니다. 온라인 변경·취소는 11/25 중까지, 이후 식당 직접 연락. 당일 변경·취소 100% 규정이 있으나 좌석 예약의 산정 기준은 식당 확인이 필요합니다.</p></div></li>
+<li><span class="t">20:15 목표</span><div><p class="what">장보기 · 숙소 복귀</p><p class="memo">물·간식·다음 날 아침거리 준비. 숙소 소음 제한 21:00~08:00에 맞춰 조용히 귀가합니다.</p></div></li>
+</ol>
+      <div class="callout ok" style="margin:0 20px 18px">
+        <h3>체자리 예약 확인 완료</h3>
+        <p>일휴닷컴 예약 완료 메일을 확인했습니다. <strong>11월 27일(금) 18:30 · 성인 5명 + 어린이 1명 · 좌석만 예약</strong>입니다. 예약번호는 개인정보 보호를 위해 홈페이지에는 표시하지 않고 메일에서 확인합니다.</p>
+      </div>
+      <div class="callout ok" style="margin:0 20px 18px">
+        <h3>노리타케는 선택 일정입니다</h3>
+        <p>기본안은 휴식 후 오스입니다. 체크인·점심이 일찍 끝나고 가족이 원하면 노리타케로 바꿀 수 있습니다. 박물관·웰컴센터는 17:00, 숍은 18:00까지이며 체험 접수는 16:00까지입니다. 늦은 오후에는 정원 산책 위주로 짧게 보세요. 오스로 바로 가면 <strong>워해머 스토어</strong>·Kapital·아미카 오스(슈퍼)를 저녁 전에 둘러볼 수 있습니다. 워해머의 기존 화·수 휴무·14~15시 휴게 정보는 해당 지점 공식 안내로 재확인해야 합니다.</p>
+      </div>
+    </article>
+
+    <!-- DAY 3 -->
+    <article class="day" id="d3">
+      <header>
+        <span class="dn"><span class="day-number">03</span><span class="day-date">DAY 3<br>11/28 토</span></span>
+        <h3 class="dt">이누야마 · 사카에</h3>
+        <span class="badge">국보 천수 · 외관</span>
+        <span class="badge">단풍철 · 아침 공략</span>
+      </header>
+      <ol class="steps">
+        <li><span class="t">07:15</span><div><p class="what">숙소 또는 편의점 아침 <span class="chip c-eat">식사</span></p><p class="memo">단풍철 토요일이라 평소보다 일찍 움직입니다. 오래 걷기 전 든든하게 먹고 출발하세요</p></div></li>
+        <li><span class="t">08:00</span><div><p class="what">숙소 출발 <span class="chip c-mv">이동</span></p><p class="memo"><strong>특별차 6석은 아직 미구매</strong>입니다. 실제 지정권의 열차 시각에 맞춰 출발하세요. 메이테쓰 나고야역은 JR 나고야역과 다른 역이니 주의</p></div></li>
+        <li><span class="t">08:50 목표</span><div><p class="what">이누야마 도착 <span class="chip c-mv">이동</span></p><p class="memo">정확한 열차 시각은 지정권 구매 후 확정하세요. 이누야마역에서 성까지 공식 도보 약 20분이며 가족 이동은 25~30분을 잡습니다</p></div></li>
+        <li><span class="t">09:20 목표</span><div><p class="what">이누야마성 <span class="chip c-see">관광</span></p><p class="memo"><strong>천수 내부에는 들어가지 않고, 유료 본마루 구역에서 외관을 봅니다.</strong> 단풍철 주말에는 천수 입장 줄이 길고 계단이 가파릅니다. 유료 구역 입장료는 성인 1,000엔·초중학생 200엔, 6명 합계 5,200엔입니다. 무료로 보려면 성 밖·강변 조망으로 변경하세요. 성까지 오르막이 있어 천수 내부를 생략해도 완전한 평지 코스는 아닙니다</p></div></li>
+        <li><span class="t">10:00</span><div><p class="what">산코 이나리 신사 <span class="chip c-see">관광</span></p><p class="memo">성 바로 아래. 붉은 도리이 터널과 분홍 하트 에마를 짧게 둘러봅니다</p></div></li>
+        <li><span class="t">10:20</span><div><p class="what">조카마치 산책 · 간식 <span class="chip c-eat">식사</span></p><p class="memo">당고·딸기다이후쿠 같은 간식을 맛보며 단풍철 조카마치를 천천히 걷습니다</p></div></li>
+        <li><span class="t">11:30</span><div><p class="what">이누야마 현지 점심 <span class="chip c-eat">식사</span></p><p class="memo">단풍철 토요일 정오는 가장 붐비니 30분 일찍 들어갑니다. <strong>식당은 출발 전 한 곳 정해두세요.</strong> 혼잡한 인기점보다 6명이 편하게 앉을 수 있는 곳을 우선합니다. 저녁은 히츠마부시이므로 가볍게</p></div></li>
+        <li><span class="t">13:00 목표</span><div><p class="what">이누야마 출발 → 나고야 복귀 <span class="chip c-mv">이동</span></p><p class="memo">돌아오는 편도 특별차 지정권 구매 후 시각을 확정합니다. 주말 혼잡은 보장할 수 없습니다. 정확한 지정 열차 시각에 맞춰 성하마을에서 역으로 걷는 시간과 승강장 여유 15분을 확보하세요</p></div></li>
+        <li><span class="t">14:00 목표</span><div><p class="what">숙소 복귀 <span class="chip c-mv">이동</span></p></div></li>
+        <li><span class="t">14:00~<wbr>16:30</span><div><p class="what">숙소 휴식</p><p class="memo">아침부터 이동한 가족을 위한 고정 휴식시간입니다</p></div></li>
+        <li><span class="t">17:00</span><div><p class="what">사카에 이동 <span class="chip c-mv">이동</span></p></div></li>
+        <li><span class="t">17:30</span><div><p class="what">사카에 자유 쇼핑 <span class="chip c-buy">쇼핑</span> <span class="pick">찜</span></p><p class="memo">관심사대로 흩어지세요 — <strong>나 + 매제</strong>: 몽벨·노스페이스 등(지점 위치·영업 확인 후 1~2곳) · <strong>아버지</strong>: 사카에 로프트(문구·정확한 지점 확인) · <strong>어머니·동생·조카</strong>: 다이소·라시크·오아시스21</p></div></li>
+        <li><span class="t">18:30</span><div><p class="what">가족 합류</p></div></li>
+        <li><span class="t">19:00</span><div><p class="what">무나기 — 히츠마부시 <span class="chip c-eat">식사</span> <span class="pick">찜</span></p><p class="memo">사카에 4초메 지하 1층. <strong>공식 영업 11:00~23:00 / 마지막 주문 22:30 · 부정기 휴무.</strong> 6명 예약은 아직 메일 증빙이 없습니다. 대기시간을 보장할 수 없어 사전 예약을 권합니다. 세 번에 나눠 드세요 — ① 그대로 ② 파·김·와사비 ③ 육수 부어 오차즈케. <strong>예상 주문: 성인 5명 히츠마부시 각 4,990엔 · 조카 작은 무나동 3,790엔 · 합계 28,740엔</strong>. 두 메뉴의 최신 가격·어린이 메뉴 여부는 예약 시 확인하고 음료는 별도 계산합니다</p></div></li>
+      </ol>
+    </article>
+
+    <!-- DAY 4 -->
+    <article class="day" id="d4">
+      <header>
+        <span class="dn"><span class="day-number">04</span><span class="day-date">DAY 4<br>11/29 일</span></span>
+        <h3 class="dt">짐은 공항으로, 숲길과 수족관을 거쳐 귀국</h3>
+        <span class="badge">출국 20:00</span>
+      </header>
+      <ol class="steps">
+<li><span class="t">07:30</span><div><p class="what">기상 · 짐 최종 정리</p><p class="memo">여권·휴대전화·보조배터리·귀중품·필수약은 직접 휴대합니다. 배송 가능 품목·크기·무게는 신청 규정을 확인하세요.</p></div></li>
+<li><span class="t">08:35</span><div><p class="what">체크아웃 — 두 팀으로 출발</p><p class="memo"><strong>짐팀(나 + 매제)</strong>: 캐리어 6개를 싣고 택시로 윙크 아이치(약 5분). <strong>식사팀(부모님·동생·조카)</strong>: 09:05쯤 택시 1대로 버미큘라 직행. 열쇠 반납 방법과 이른 출발은 호스트에게 미리 확인하세요.</p></div></li>
+<li><span class="t">08:50</span><div><p class="what">짐팀 — 윙크 아이치 1층 편의점 내 접수처 도착</p><p class="memo">공항행 접수는 09:00~10:00. 줄 맨 앞에 서도록 일찍 도착하고 신청 QR·배송 정보를 준비합니다.</p></div></li>
+<li><span class="t">09:00</span><div><p class="what">Baggage GO 공항 배송 접수</p><p class="memo"><strong>배송은 아직 신청 전.</strong> 실증기간 11/4~12/18, 사전 설문·무료 쿠폰 적용 시 무료. 11/28 15:00부터 신청 가능하며 1인 최대 3개·일일 수량 제한이 있습니다. 6개는 나와 매제 이름으로 3개씩 나눠 등록하세요. 공항 T1 1층 JAL ABC에서 15:00~22:00 수령합니다.</p></div></li>
+<li><span class="t">접수 직후</span><div><p class="what">짐팀 — 택시로 버미큘라 합류</p><p class="memo">09:45 전후 합류 목표. 버미큘라에는 "2명이 15분쯤 늦게 온다"고 미리 알려두세요.</p></div></li>
+<li><span class="t">09:30<br>~10:30</span><div><p class="what">버미큘라 모닝 — 예약 확정</p><p class="memo"><strong>11/29 09:30 예약 확정(사용자 확인).</strong> 식사팀 4명이 09:30에 먼저 착석하고 짐팀 2명이 뒤따라 합류합니다. 공식 게시 가격 참고: 모닝 1,500엔·세트 음료 440엔, 6명 음료 포함 시 11,640엔. 실제 주문·메뉴·아동 조건에 따라 달라집니다.</p></div></li>
+<li><span class="t">10:30<br>~11:00</span><div><p class="what">플래그십숍 · 베이커리</p><p class="memo">숍·베이커리 모두 10:00부터 영업. 수하물 무게·국내 사용 전압을 고려해 쇼핑하세요. 면세 대상 구매는 매장에서 환급 방법을 확인하고 영수증을 보관합니다.</p></div></li>
+<li><span class="t">11:00<br>~11:30</span><div><p class="what">택시 2대로 아쓰타신궁 이동</p><p class="memo">배차·승하차를 포함한 목표 시간입니다. 도로 상황에 따라 달라집니다.</p></div></li>
+<li><span class="t">11:30<br>~12:10</span><div><p class="what">아쓰타신궁 — 가을 숲길 산책</p><p class="memo">참배길·본궁을 중심으로 40분 가볍게 걷습니다. 전체가 붉게 물드는 단풍 명소보다는 오래된 숲과 신궁의 차분한 분위기를 즐기는 시간입니다. 보물관 등 유료 관람은 넣지 않습니다.</p></div></li>
+<li><span class="t">12:10<br>~12:40</span><div><p class="what">점심 — 미야키시멘 진구점</p><p class="memo">신궁 경내의 기시멘 전문점. 매일 09:00~16:30·무휴(방문 전 확인) · 식권제. 아침이 늦었으니 한 그릇씩 가볍게. 아버지 우동은 여기서 한 번 더.</p></div></li>
+<li><span class="t">12:40<br>~13:20</span><div><p class="what">아쓰타신궁 → 나고야항</p><p class="memo"><strong>아쓰타진구텐마초(熱田神宮伝馬町, M26) → 메이조선 가나야마 방면 → 가나야마에서 메이코선 나고야코(名古屋港, E07)행 환승.</strong> 신궁→역 도보와 대기·환승·수족관 방향 도보를 합친 목표입니다.</p></div></li>
+
+<li><span class="t">13:20<br>~16:00</span><div><p class="what">나고야항 수족관</p><p class="memo"><strong>약 2시간 40분 관람.</strong> 입장하면 돌고래 공연 시간표부터 확인하고 공연 1회를 중심으로 순서를 정합니다. 범고래·벨루가·정어리 행사를 전부 필수로 잡지는 않습니다. 16:00 퇴장은 꼭 지키세요.</p></div></li>
+<li><span class="t">16:00</span><div><p class="what">수족관 출발 → 나고야코역</p><p class="memo">출구에서 역 3번 출구까지 공식 도보 약 5분. 승강장 이동까지 약 10분을 잡습니다. 가나야마에서 짐 회수는 없습니다.</p></div></li>
+<li><span class="t">16:10 전후</span><div><p class="what">메이코선 → 가나야마 → 메이테쓰 공항행</p><p class="memo">나고야코→가나야마 약 11~12분, 메이테쓰 환승·대기 약 10~25분, 뮤스카이 승차 약 24분 + 공항 내 도보. 수족관부터 T1까지 <strong>약 60~80분 예상</strong>. 정확한 열차는 아직 미확정입니다.</p></div></li>
+<li><span class="t">17:10 전후</span><div><p class="what">센트레아 T1 도착 목표 · 배송 짐 수령</p><p class="memo"><strong>T1 1층 JAL ABC</strong>에서 캐리어 수령 후 3층 출발층으로 이동합니다. 수령 확인·대기시간은 별도입니다. 짐이 배송 완료됐는지 추적 화면으로 확인하세요.</p></div></li>
+<li><span class="t">17:30</span><div><p class="what">면세 구매품 세관 확인 · 항공 수속</p><p class="memo">2026.11.1부터 매장에서 세금 포함 결제 후 출국 세관 확인을 거쳐 환급하는 방식입니다. 실물 확인 대상이 될 수 있어 면세 구매품을 꺼낼 수 있게 준비하고, 위탁 전에 확인 절차를 안내받으세요. 진에어 카운터는 공식 안내상 출발 2시간 30분 전인 17:30 개시 목표입니다.</p></div></li>
+<li><span class="t">수속 후</span><div><p class="what">저녁 · 보안검색 · 출국심사</p><p class="memo">환급·짐 수령·항공 수속을 우선하고 쇼핑은 남은 시간에 합니다.</p></div></li>
+<li><span class="t">19:15 목표</span><div><p class="what">탑승구 도착</p><p class="memo">최종 탑승 마감은 탑승권·항공사 안내를 따릅니다.</p></div></li>
+<li><span class="t">20:00<br>~22:15</span><div><p class="what">진에어 LJ292 → 인천 T2</p><p class="memo">센트레아 T1 출발. 확인한 항공권 3명은 왕복 15kg 및 좌석 확약, 나머지 3명 항공권·좌석은 별도 대조가 필요합니다.</p></div></li>
+</ol>
+      <div class="callout ok" style="margin:0 20px 18px"><h3>마지막 날 핵심 — 배송 확보 후 가볍게 이동</h3><p><strong>윙크 아이치 → 버미큘라 09:30 → 아쓰타신궁(미야키시멘 점심) → 수족관 16:00 퇴장 → 공항 T1</strong>. 가나야마는 환승만 합니다. 짐은 공항 1층에서 직접 찾아야 하며 항공 위탁까지 대행하는 서비스는 아닙니다.</p><p>배송이 일일 한도로 마감되면 기존 가나야마 보관 대안을 재검토해야 합니다. 09:00 접수와 09:30 식당이 겹치므로 짐팀(나+매제)과 식사팀(4명)으로 나눠 움직입니다.</p></div>
+    </article>
+  </section>
+
+  <section id="maps">
+    <h2 class="head">어디를 어떻게 다니나</h2>
+    <p class="lede">광역 이동은 철도, 시내 일부는 택시 2대입니다. 아래 지도는 위치 개념도이며 실제 도보·대기·환승 시간은 상세 일정에 포함합니다.</p>
+
+    <div class="mapbox">
+      <h3>광역 — 게로 · 나고야 · 이누야마</h3>
+      <div class="mapscroll"><svg viewBox="0 0 700 280" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="게로에서 나고야까지 특급 1시간 40분, 이누야마까지 30분, 센트레아까지 28분">
+        <line x1="360" y1="52" x2="360" y2="150" stroke="#2F7A85" stroke-width="2.5"/>
+        <line x1="360" y1="150" x2="170" y2="98" stroke="#B0722A" stroke-width="2.5"/>
+        <line x1="360" y1="150" x2="360" y2="240" stroke="#7C4A63" stroke-width="2.5"/>
+        <circle cx="360" cy="52" r="7" fill="#2F7A85"/>
+        <circle cx="360" cy="150" r="9" fill="#1A1E1B"/>
+        <circle cx="170" cy="98" r="7" fill="#B0722A"/>
+        <circle cx="360" cy="240" r="7" fill="#7C4A63"/>
+        <text class="mp-node" x="378" y="50">게로온천</text>
+        <text class="mp-sub"  x="378" y="67">스이메이칸 · 1박</text>
+        <text class="mp-node" x="382" y="148">나고야</text>
+        <text class="mp-sub"  x="382" y="165">Kagetu-HANA · 2박</text>
+        <text class="mp-node" x="152" y="96" text-anchor="end">이누야마</text>
+        <text class="mp-sub"  x="152" y="113" text-anchor="end">국보 천수 · 조카마치</text>
+        <text class="mp-node" x="382" y="238">센트레아 T1</text>
+        <text class="mp-sub"  x="382" y="255">공항</text>
+        <text class="mp-dur" x="374" y="108" text-anchor="start">특급 히다 1시간 40분</text>
+        <text class="mp-dur" x="262" y="146" text-anchor="middle">메이테쓰 30분</text>
+        <text class="mp-dur" x="348" y="198" text-anchor="end">뮤스카이 28분</text>
+      </svg></div><p class="maphint">좌우로 밀어서 보세요</p>
     </div>
 
+    <div class="mapbox">
+      <h3>나고야 시내 — 숙소 기준</h3>
+      <div class="mapscroll"><svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" role="img"
+           aria-label="나고야역 남쪽 숙소를 중심으로 사카에, 오스, 아쓰타, 나고야항의 위치">
+        <line x1="150" y1="120" x2="440" y2="88"  stroke="#CFD2CB" stroke-width="2"/>
+        <line x1="150" y1="120" x2="360" y2="178" stroke="#CFD2CB" stroke-width="2"/>
+        <line x1="150" y1="120" x2="330" y2="252" stroke="#CFD2CB" stroke-width="2"/>
+        <line x1="330" y1="252" x2="185" y2="272" stroke="#CFD2CB" stroke-width="2"/>
+        <line x1="150" y1="120" x2="120" y2="58"  stroke="#CFD2CB" stroke-width="2"/>
+        <circle cx="150" cy="120" r="10" fill="#1A1E1B"/>
+        <circle cx="440" cy="88"  r="7" fill="#7C4A63"/>
+        <circle cx="360" cy="178" r="7" fill="#B0722A"/>
+        <circle cx="330" cy="252" r="7" fill="#2F7A85"/>
+        <circle cx="185" cy="272" r="7" fill="#2F7A85"/>
+        <circle cx="120" cy="58"  r="7" fill="#B0722A"/>
+        <text class="mp-node" x="150" y="145" text-anchor="middle">나고야역 · 숙소</text>
+        <text class="mp-sub"  x="150" y="161" text-anchor="middle">메이에키미나미 3초메</text>
+        <text class="mp-node" x="458" y="86">사카에</text>
+        <text class="mp-sub"  x="458" y="102">쇼핑 · 무나기</text>
+        <text class="mp-node" x="378" y="176">오스</text>
+        <text class="mp-sub"  x="378" y="192">워해머 · 상점가</text>
+        <text class="mp-node" x="348" y="250">아쓰타신궁</text>
+        <text class="mp-sub"  x="348" y="266">진구마에역</text>
+        <text class="mp-node" x="167" y="270" text-anchor="end">나고야항</text>
+        <text class="mp-sub"  x="167" y="286" text-anchor="end">가나야마 경유 · 수족관</text>
+        <text class="mp-node" x="104" y="56" text-anchor="end">노리타케</text>
+        <text class="mp-sub"  x="104" y="72" text-anchor="end">나고야역에서 도보 약 15분</text>
+        <text class="mp-dur" x="300" y="96"  text-anchor="middle">지하철 10분</text>
+        <text class="mp-dur" x="250" y="163" text-anchor="middle">10분</text>
+        <text class="mp-dur" x="215" y="205" text-anchor="middle">역간 승차 약 6분</text>
+      </svg></div><p class="maphint">좌우로 밀어서 보세요</p>
+    </div>
+
+    <div class="links">
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%A4%A9%E3%81%B7%E3%82%89+%E3%81%8D%E3%81%97%E3%82%81%E3%82%93+%E5%A4%9A%E9%96%80+%E5%A4%A7%E5%90%8D%E5%8F%A4%E5%B1%8B%E3%83%93%E3%83%AB" target="_blank" rel="noopener"><span>11/26 점심</span>덴푸라 기시멘 다몬 · 대나고야빌딩 B1</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%8B%E5%91%82%E6%B8%A9%E6%B3%89%E6%B0%B4%E6%98%8E%E9%A4%A8" target="_blank" rel="noopener"><span>11/26 숙소</span>게로온천 스이메이칸</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BB%81%E5%A4%AA%E9%83%8E+%E4%B8%8B%E5%91%82%E9%A7%85%E5%89%8D%E5%BA%97" target="_blank" rel="noopener"><span>11/27 오전</span>니타로 게로역앞점</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E5%B8%82%E4%B8%AD%E6%9D%91%E5%8C%BA%E5%90%8D%E9%A7%85%E5%8D%97%EF%BC%93%E4%B8%81%E7%9B%AE%EF%BC%98-11" target="_blank" rel="noopener"><span>11/27~29 숙소</span>Kagetu-HANA</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%8E%E3%83%AA%E3%82%BF%E3%82%B1%E3%81%AE%E6%A3%AE" target="_blank" rel="noopener"><span>11/27 선택</span>노리타케의 숲</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=Pizzeria+Braceria+CESARI+Osu+Nagoya" target="_blank" rel="noopener"><span>11/27 18:30 저녁</span>피체리아 브라체리아 체자리!!</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E7%8A%AC%E5%B1%B1%E5%9F%8E" target="_blank" rel="noopener"><span>11/28 오전</span>이누야마성</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E7%8A%AC%E5%B1%B1%E5%9F%8E%E4%B8%8B%E7%94%BA" target="_blank" rel="noopener"><span>11/28 오전</span>이누야마 조카마치</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%A0%E3%83%8A%E3%82%AE+%E6%A0%84" target="_blank" rel="noopener"><span>11/28 19:00 저녁</span>무나기 히츠마부시</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=WINC+AICHI" target="_blank" rel="noopener"><span>11/29 09:00 · 공항 배송 접수</span>윙크 아이치 1층 편의점 내 접수처</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=VERMICULAR+VILLAGE+%E5%90%8D%E5%8F%A4%E5%B1%8B" target="_blank" rel="noopener"><span>11/29 09:30 · 예약 확정</span>버미큘라 빌리지</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E7%86%B1%E7%94%B0%E7%A5%9E%E5%AE%AE" target="_blank" rel="noopener"><span>11/29 오전</span>아쓰타신궁</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=%E5%90%8D%E5%8F%A4%E5%B1%8B%E6%B8%AF%E6%B0%B4%E6%97%8F%E9%A4%A8" target="_blank" rel="noopener"><span>11/29 오후</span>나고야항 수족관</a>
+    </div>
+  </section>
+
+  <section id="book">
+    <h2 class="head">항공편</h2>
+    <p class="lede">진에어 LJ289 / LJ292 · 6인 발권은 기존 기록 기준 · Gmail 항공권 3명분 대조 완료 · 나머지 3명은 확인 필요</p>
+    <div class="box">
+      <div class="tablewrap"><table class="stack">
+        <tr><th>구간</th><th class="num">출발</th><th class="num">도착</th><th>비고</th></tr>
+        <tr><td data-label="구간">11/26 인천 → 주부<small>인천 <strong>T2</strong> → 센트레아 <strong>T1</strong></small></td>
+            <td class="num" data-label="출발">07:30</td><td class="num" data-label="도착">09:30</td>
+            <td data-label="비고">공항 05:30 도착 · 시차 없음</td></tr>
+        <tr><td data-label="구간">11/29 주부 → 인천<small>센트레아 <strong>T1</strong> → 인천 <strong>T2</strong></small></td>
+            <td class="num" data-label="출발">20:00</td><td class="num" data-label="도착">22:15</td>
+            <td data-label="비고">공항 T1 17:10 전후 도착 · 카운터 17:30 개시</td></tr>
+      </table></div>
+      <p style="margin:12px 0 0;font-size:13.5px;color:var(--stone)">
+        <strong>인천은 제2터미널입니다.</strong> 터미널을 잘못 찾으면 이동·대기 시간이 추가됩니다. 새벽 5시 반 집결이라 이동 수단을 미리 정해두세요.
+      </p>
+    </div>
+  </section>
+
+  <section id="stay">
+    <h2 class="head">숙소</h2>
+    <p class="lede">둘 다 확정입니다.</p>
+    <div class="box">
+      <div class="tablewrap"><table class="stack">
+        <tr><th>날짜</th><th>숙소</th><th class="num">상태</th></tr>
+        <tr><td class="num" data-label="날짜">11/26 목</td>
+            <td data-label="숙소">게로온천 스이메이칸<small>객실 2개 · Sansuikaku 또는 Hisenkaku 유형 · 성인 5 + 아동 1 · 조식 포함 · 객실별 배정은 숙소 확인 · 게로역 도보 3분 · <strong>체크인 14:00 / 체크아웃 11:00</strong></small></td>
+            <td class="num" data-label="상태" style="color:var(--teal)">확정</td></tr>
+        <tr><td class="num" data-label="날짜">11/27 금<br>11/28 토</td>
+            <td data-label="숙소">Kagetu-HANA<small>메이에키미나미 3초메 8-11 · 집 전체 3LDK 80㎡ · 정원 9명</small></td>
+            <td class="num" data-label="상태" style="color:var(--teal)">확정<small style="font-weight:300">11/15 결제 완료</small></td></tr>
+      </table></div>
+      <p style="margin:12px 0 0;font-size:13.5px;color:var(--stone)">
+        Kagetu-HANA 체크인 <strong>15:00 이후</strong> — 그 전에 도착하면 추가 요금이 붙습니다. 열쇠는 도보 1분 거리 <strong>카나리야 레지던스</strong>에서 받고, 체크아웃은 11/29 10:00까지. 도착 전 에어비앤비 메시지로 도착 시간과 여권 사진을 보내야 합니다. 17시 이후면 우편함 셀프체크인.
+        <br>호스트 안내: 무료 짐 보관은 사전 예약 필요·대응 10:00~16:45. 4일차 이른 아침 보관은 별도 협의가 필요합니다. 밥솥은 무료이나 냄비 세트는 5~6인용 하루 3,000엔 대여 안내가 있어 취사 전 기본 비품을 확인하세요.<br><strong>소음 제한 21:00~08:00</strong> — 주택가입니다. 가족들에게 미리 알려두세요.
+      </p>
+    </div>
+  </section>
+
+  <section id="saved">
+    <details class="fold"><summary><h2 class="head">찜해둔 곳 — 아직 안 넣은 것</h2><span class="fold-hint"><span class="closed">펼치기</span><span class="opened">접기</span></span></summary>
+    <p class="lede">일정에 없지만 상황 따라 쓸 수 있는 카드입니다.</p>
+    <div class="grid2">
+      <div class="box">
+        <h3>숙소 근처 (도보권)</h3>
+        <ul>
+          <li><strong>7-Eleven</strong> · <strong>아미카 오스</strong>(슈퍼) — 취사 비품·냄비 대여 조건 확인 필요</li>
+          <li><strong>Washoku Sato</strong> — 가정식 체인, 부모님께 무난</li>
+          <li><strong>Kappa Sushi</strong> — 회전초밥, 조카용</li>
+          <li><strong>Marunaka</strong> — 아버지 튀김</li>
+          <li><strong>Cesari Pizza</strong> — 11/27 예약 식당과 중복되는 후보인지 지점 확인</li>
+          <li><strong>후라이보</strong>(테바사키) — 포장 추천. 지점 영업시간·개찰 안팎 위치를 방문 전 확인하세요. 후추가 세니 조카 몫은 따로</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>시간 남으면</h3>
+        <ul>
+          <li><strong>스카이 프롬나드</strong> — 미들랜드 스퀘어 44층. 나고야역 앞, 야경</li>
+          <li><strong>크레용 신짱 POP UP</strong> — 행사 기간·장소 확인 전 방문 계획에 넣지 않음</li>
+          <li><strong>야하타야 메이에키 혼텐</strong> — 우이로 노포, 선물용</li>
+          <li><strong>Kamimura Bokujo</strong> — 무한리필 야키니쿠. 기타구라 좀 멉니다</li>
+          <li><strong>GU 게이트타워</strong> — 나고야역 안</li>
+          <li><strong>Workman Plus</strong> — 작업복·등산 겸용. 나카가와구라 이번엔 어려움</li>
+        </ul>
+      </div>
+    </div>
+    </details>
+  </section>
+
+  <section id="pack">
+    <h2 class="head">챙길 것</h2>
+    <div class="grid2">
+      <div class="box">
+        <h3>옷 — 평년 참고, 출발 전 예보 확인</h3>
+        <ul>
+          <li><strong>게로 아침</strong> 기존 계획 참고 0~3℃(당일 예보 아님) — 노천탕 오갈 때 겉옷 하나 더</li>
+          <li><strong>이누야마</strong> — 야외에 오래 있습니다. 바람 막을 겉옷</li>
+          <li><strong>나고야 낮</strong> 기존 계획 참고 13~16℃ / 저녁 5~10℃(당일 예보 아님)</li>
+          <li>조카 여벌 상의 한 벌</li>
+        </ul>
+      </div>
+      <div class="box">
+        <h3>빠뜨리기 쉬운 것</h3>
+        <ul>
+          <li><strong>수영복 · 수영모</strong> — 수영장 이용 예정인 사람만. 타월 제공·대여는 숙소 확인</li>
+          <li><strong>여권 · 여권 사진 파일</strong></li>
+          <li>교통계 IC카드(마나카·스이카) — 지하철·버스</li>
+          <li>현금은 가족 공용으로 준비 — 소규모 점포의 결제 수단은 현장 확인. 히다 결제 완료액을 현지 필요 현금에 중복 포함하지 마세요</li>
+        </ul>
+      </div>
+    </div>
+    <div class="box">
+      <h3>짐</h3>
+      <ul>
+        <li>1일차엔 나누지 않고 캐리어 그대로 게로까지 들고 갑니다. 특급 히다는 대형 짐 공간이 넉넉하지 않으니 승강장 이동에 여유를 두세요</li>
+        <li>수하물 15kg. 돌아올 때 밤과자·우이로·등산용품을 사실 계획이면 <strong>미리 추가 구매</strong>하세요</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="todo">
+    <h2 class="head">놓치면 곤란한 것</h2>
+    <p class="lede">날짜 순서대로입니다. 빨간 날짜는 놓치면 돈이 걸린 마감입니다.</p>
+
+    <div class="box">
+      <ol class="timeline">
+        <li><span class="when">지금</span><div><p class="what2">스이메이칸에 조카 나이 정정 요청</p><p class="why">예약에 아동이 12세로 등록돼 있습니다. 실제 7세로 고쳐달라고 메일 · s-reserve@suimeikan.co.jp · +81-576-25-2800</p></div></li>
+        <li><span class="when">지금</span><div><p class="what2">진에어 6명 좌석 대조 · 필요 시 수하물 추가</p><p class="why">확인한 가족 3명은 항공권에 왕복 좌석 확약이 있습니다. 나머지 3명 항공권을 대조하고 조카와 보호자가 함께 앉는지 확인하세요. 함께 앉는 좌석이 보장되지 않았다면 지정하고, 짐이 늘 것 같으면 수하물도 같은 메뉴에서 미리 추가하세요</p></div></li>
+        <li><span class="when">10/26(월) ✓</span><div><p class="what2">특급 히다 가는 편 — 예매 완료</p><p class="why">11/26 히다 11호 12:48 · 8호차 13~15번 A·B석 · 25,840엔 결제. 변경은 1회만 가능</p></div></li>
+        <li><span class="when">10/27(화) ✓</span><div><p class="what2">특급 히다 오는 편 — 예매 완료</p><p class="why">11/27 히다 8호 12:22 · 8호차 11~13번 A·B석 · 26,940엔 결제. 변경은 1회만 가능</p></div></li>
+        <li><span class="when">11/15(일) ✓</span><div><p class="what2">에어비앤비 — 결제 완료</p><p class="why">11/14 자동 결제는 실패했으나 11/15에 592,286원 결제를 마쳤고 영수증 메일을 확인했습니다</p></div></li>
+        <li><span class="when due">11/21(토) 23:59</span><div><p class="what2">스이메이칸 무료 취소 마감(일본시간)</p><p class="why">11/22~23 취소 30%, 11/24부터 취소·노쇼 100%. 아동 나이 정정 시 요금·조건 변동도 확인하세요.</p></div></li>
+        <li><span class="when due">11/22(일) 15:00</span><div><p class="what2">Kagetu-HANA 무료 취소 마감(일본시간)</p><p class="why">11/22 15:00 전까지 무료. 이후 체크인 전 부분 환불 세부액은 예약 관리 화면에서 확인하세요.</p></div></li>
+        <li><span class="when">11/25(수)</span><div><p class="what2">체자리 온라인 변경 · 취소 가능 기한</p><p class="why">11/25 중까지 사이트에서 가능, 이후 식당 직접 연락. 당일 변경·취소 100% 규정의 산정 기준은 식당 확인.</p></div></li>
+        <li><span class="when">11/28 15:00</span><div><p class="what2">무료 공항 짐 배송 신청</p><p class="why">설문 응답·무료 쿠폰 적용 후 11/29 윙크 아이치→센트레아 예약. 1인 최대 3개·일일 수량 제한. 6개 접수와 식당 이동 택시를 준비하세요.</p></div></li><li><span class="when">출발 전</span><div><p class="what2">호스트에게 여권 사진 6인분 · 도착 시간 보내기</p><p class="why">호스트가 체크인 전 여권 사진과 도착 시간 전달을 요청했습니다. 에어비앤비의 해당 예약 메시지로 미리 전달하고 제출 완료 여부를 확인하세요</p></div></li>
+        <li><span class="when">11/26 도착일</span><div><p class="what2">미유티켓 구매 · 히다 왕복 표 수령</p><p class="why">메이테쓰: 11/28 이누야마 왕복 특별차 6석 · 1승차 450엔. JR: 실물 결제 카드·예약번호·인증번호 4자리로 히다 왕복 표 수령(개찰구 밖 발권기·창구)</p></div></li>
+      </ol>
+    </div>
+
+    <div class="callout ok">
+      <h3>교통 패스는 사지 않습니다</h3>
+      <p>마나카·스이카 같은 교통계 IC카드로 지하철·버스를 그때그때 태그하면 됩니다. 11/29(일)은 지하철을 여러 번 탄다면 도니치 에코 킷푸가 유리할 수 있으니 당일 창구에서 비교해보세요.</p>
+    </div>
+
+    <div class="box">
+      <h3>예약 확인 및 남은 할 일</h3><p class="memo">예약 확인 표시는 고정입니다. 아래 체크는 개인 할 일 완료 표시이며 예약을 변경하지 않습니다. 상태는 이 기기에만 저장됩니다.</p><button type="button" id="reset-checks">이 기기의 체크 초기화</button><p id="save-status" role="status" aria-live="polite" class="memo"></p>
+      <ul class="check">
+        <li><span class="confirmed">확인 완료</span><span class="booking-text">특급 히다 지정석 — 가는 편 예매 완료 <span class="tag">11/26 12:48</span><br><span style="font-size:13px;color:var(--stone)"><strong>히다 11호</strong> 나고야→게로 · 8호차 13~15번 A·B석 · 성인 5 + 소아 1 · 25,840엔. 표는 당일 나고야역에서 결제 카드로 수령</span></span></li>
+        <li><span class="confirmed">확인 완료</span><span class="booking-text">특급 히다 지정석 — 오는 편 예매 완료 <span class="tag">11/27 12:22</span><br><span style="font-size:13px;color:var(--stone)"><strong>히다 8호</strong> 게로→나고야 · 8호차 11~13번 A·B석 · 성인 5 + 소아 1 · 26,940엔. 표는 11/26 나고야역에서 가는 편과 함께 수령</span></span></li>
+        <li><input type="checkbox" id="k1c"><label for="k1c">메이테쓰 미유티켓 — 11/28 이누야마 왕복 <span class="tag">6석 × 2회</span><br><span style="font-size:13px;color:var(--stone)">1일차 메이테쓰 나고야역 발권기에서 구매. 1승차 450엔 · 특별차 있는 편으로</span></label></li>
+        <li><input type="checkbox" id="k2"><label for="k2">메이테쓰 뮤스카이 <span class="tag">6석 × 2회</span><br><span style="font-size:13px;color:var(--stone)">11/26 공항→나고야는 수속 후 실제 탑승 가능편 선택. 11/29 <strong>가나야마</strong>→공항은 T1 17:10 전후 도착하는 실제편을 확정. 기본 운임 별도</span></label></li>
+        <li><span class="confirmed">예약 확정</span><span class="booking-text">버미큘라 모닝 <span class="tag">11/29 09:30</span><br><span style="font-size:13px;color:var(--stone)">사용자 확인으로 확정 반영. 식사팀 4명은 숙소에서 직행, 짐팀 2명은 배송 접수 후 합류.</span></span></li>
+        <li><input type="checkbox" id="k3b"><label for="k3b">무나기 저녁 예약 <span class="tag">11/28 19:00</span><br><span style="font-size:13px;color:var(--stone)">6명 · 성인 5 히츠마부시 각 4,990엔 · 조카 작은 무나동 3,790엔 · 예상 28,740엔. 최신 단가·아동 메뉴·음료 별도 확인</span></label></li>
+        <li><input type="checkbox" id="k4"><label for="k4">나고야항 수족관 온라인 티켓<br><span style="font-size:13px;color:var(--stone)">일요일이라 붐빕니다. QR 사전 구매로 매표 줄 회피. 돌고래 쇼 시간표도 확인</span></label></li>
+        <li><input type="checkbox" id="kship"><label for="kship">무료 Baggage GO 공항 배송 신청 <span class="tag">11/28 15:00부터</span><br><span style="font-size:13px;color:var(--stone)">11/29 윙크 아이치 09:00~10:00 접수 → 센트레아 T1 1층 JAL ABC 15:00~22:00 수령. 설문·무료 쿠폰 적용. 1인 최대 3개·일일 한도 있음. 6개는 최소 2명으로 신청.</span></label></li>
+        <li><input type="checkbox" id="k6"><label for="k6">택시 이용 구간 미리 검토 <span class="tag">2대 × 3명</span><br><span style="font-size:13px;color:var(--stone)">숙소→윙크 아이치→버미큘라→아쓰타신궁(11/29), 노리타케 선택 시 추가. 캐리어 6개 적재 가능한지 차종 확인. 콜택시 앱(GO 등)을 미리 깔아두면 편합니다</span></label></li>
+        <li><input type="checkbox" id="k7"><label for="k7">여행자보험 6인</label></li>
+        <li><span class="confirmed">확인 완료</span><span class="booking-text">체자리 저녁 좌석 예약 완료 <span class="tag">11/27 18:30</span><br><span style="font-size:13px;color:var(--stone)">일휴닷컴 메일 확인 완료 · 성인 5명 + 어린이 1명, 총 6명 · 좌석만 예약 · 온라인 변경·취소는 11/25(수) 중까지, 이후 식당 연락</span></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="cost">
+    <details class="fold"><summary><h2 class="head">총비용 추산</h2><span class="fold-hint"><span class="closed">펼치기</span><span class="opened">접기</span></span></summary>
+    <p class="lede">6명 전체 · 성인 5 + 초등학생 1 · 예산 환율 100엔 = 843원(기존 계획의 계산 기준, 현재 환율 아님)</p>
+    <div class="box">
+      <div class="tablewrap"><table class="stack">
+        <tr><th>항목</th><th class="num">엔화</th><th class="num">원화</th></tr>
+        <tr><td data-label="항목">항공권 왕복 6인 <strong style="color:var(--teal)">발권 완료</strong><small>진에어 직항 · 기존 합계 2,418,700원은 잠정 유지. Gmail 항공권은 3명분만 발견되어 6명 총액·여행사 수수료 포함 여부 재대조 필요</small></td><td class="num na" data-label="엔화">—</td><td class="num" data-label="원화">2,418,700원</td></tr>
+        <tr><td data-label="항목">게로 스이메이칸 1박 <strong style="color:var(--teal)">확정</strong><small>객실 2개 · Japanese-Style Room · 조식 포함 · 681,818원 결제 메일 확인. 아동 12세→7세 정정 후 차액·현지 추가세 확인</small></td><td class="num na" data-label="엔화">—</td><td class="num" data-label="원화">681,818원</td></tr>
+        <tr><td data-label="항목">나고야 에어비앤비 2박 <strong style="color:var(--teal)">확정</strong><small>11/15 결제 완료</small></td><td class="num na" data-label="엔화">—</td><td class="num" data-label="원화">592,286원</td></tr>
+        <tr><td data-label="항목">철도 · 지하철 · 택시<small>히다 왕복 52,780엔 결제 완료(기본 운임+특급권 포함). 잔여 41,620엔은 공항·이누야마 기본 운임/특별차, 지하철, 택시·배송 미확보 시 대체 보관 비용의 잠정 한도(무료 배송 확보 시 배송료 0엔). 구간별 견적 미확정으로 충분 여부 재확인 필요</small></td><td class="num" data-label="엔화">94,400엔</td><td class="num" data-label="원화">795,792원</td></tr>
+        <tr><td data-label="항목">식사<small>스이메이칸 조식 포함. 무나기 예상 28,740엔 + 모닝 음료 포함 최대 11,640엔 + 나머지 식사·간식·음료 59,620엔의 잠정 한도. 식당 최신 단가 확인 필요</small></td><td class="num" data-label="엔화">100,000엔</td><td class="num" data-label="원화">843,000원</td></tr>
+        <tr><td data-label="항목">입장료 · 시설<small>수족관 11,160엔 + 이누야마 유료 구역 5,200엔 + 잔여 7,140엔은 선택 시설·수영장 등의 예비 한도. 무료 외관 코스로 바꾸면 성 입장료 제외. 수영장·현지 추가세는 확인 필요</small></td><td class="num" data-label="엔화">23,500엔</td><td class="num" data-label="원화">198,105원</td></tr>
+        <tr><td data-label="항목">기념품 · 잡비<small>밤과자 · 선물 · 예비비</small></td><td class="num" data-label="엔화">40,000엔</td><td class="num" data-label="원화">337,200원</td></tr>
+        <tr><td data-label="항목">여행자보험 6인</td><td class="num na" data-label="엔화">—</td><td class="num" data-label="원화">100,000원</td></tr>
+        <tr class="sum"><td>합계</td><td class="num" data-label="엔화">257,900엔<small style="font-weight:300">+ 항공·숙박·보험 원화 예산</small></td><td class="num" data-label="원화">약 5,967,000원</td></tr>
+        <tr class="sum"><td>1인당</td><td class="num na" data-label="엔화">—</td><td class="num" data-label="원화">약 994,000원<small style="font-weight:300">6명 단순 평균 약 994,484원 · 개인별 실제 부담과 다름</small></td></tr>
+      </table></div>
+      <p style="margin:13px 0 0;font-size:13px;color:var(--stone)">예산 산식: 257,900엔 × 8.43원 + 항공 2,418,700원 + 숙소 1,274,104원 + 보험 100,000원 = 5,966,901원. 히다 결제액은 교통비 안에 이미 포함됩니다. 현지 엔화 지출 잔여 계획액은 205,120엔이며 현금만의 필요액은 아닙니다. 실결제 환율·수수료·항공권 총액 재대조·나이 정정·추가 수하물·보관 대안에 따라 변동됩니다.</p>
+    </div>
+    </details>
+  </section>
+
+  <section id="swap">
+    <details class="fold"><summary><h2 class="head">바꿔도 되는 곳</h2><span class="fold-hint"><span class="closed">펼치기</span><span class="opened">접기</span></span></summary>
+    <div class="box">
+      <ul>
+        <li><strong>2일차 오후</strong> — 기본은 휴식 후 오스. 노리타케는 가족 컨디션·17:00 시설 마감·18:30 식당 예약을 만족할 때만 선택</li>
+        <li><strong>이누야마가 부담되면</strong> — 나고야성 혼마루고텐으로 대체 가능. 출입·신발 탈착·혼잡·접근성·최신 요금을 공식 안내에서 확인하세요. 천수각 관람 가능 여부도 출발 전 재확인</li>
+        <li><strong>비 오는 날</strong> — 이누야마 대신 리니어·철도관(아오나미선, 실내)</li>
+      </ul>
+    </div>
+    </details>
+  </section>
+
+  <section id="encyclopedia">
+    <h2 class="head">여행 백과사전</h2>
+    <p class="lede">일정표에 없는 궁금한 점은 NotebookLM에 물어보세요. 아래 그림은 전체 분위기를 보는 요약이고, 시간과 순서는 위 일정이 기준입니다. 예약 상태도 본문에서 확인하세요.</p>
+    <figure class="guide-visual">
+      <button class="zoom" type="button" aria-label="여행 가이드 그림 크게 보기">
+        <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5NjAiIGhlaWdodD0iOTYwIiB2aWV3Qm94PSIwIDAgOTYwIDk2MCI+PHJlY3Qgd2lkdGg9Ijk2MCIgaGVpZ2h0PSI5NjAiIGZpbGw9IiNlZGY2ZjIiLz48ZyBmb250LWZhbWlseT0ic2Fucy1zZXJpZiIgZmlsbD0iIzFmMjkyNSI+PHRleHQgeD0iNjAiIHk9Ijk1IiBmb250LXNpemU9IjQyIiBmb250LXdlaWdodD0iNzAwIj7qsozroZzsmKjsspwgwrcg64KY6rOg7JW8IOqwgOyhseyXrO2WiTwvdGV4dD48dGV4dCB4PSI2MCIgeT0iMTQ1IiBmb250LXNpemU9IjI2Ij4yMDI2LjExLjI24oCTMjkgwrcg7ISx7J24IDUgKyDslrTrprDsnbQgMSDCtyB2MTI8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjE5MCIgd2lkdGg9Ijg4MCIgaGVpZ2h0PSIxNTAiIHJ4PSIxNiIgZmlsbD0iI2ZmZmVmYSIvPjx0ZXh0IHg9IjY1IiB5PSIyMzUiIGZvbnQtc2l6ZT0iMzAiIGZvbnQtd2VpZ2h0PSI3MDAiPjExLzI2IOuqqSDCtyDqsozroZw8L3RleHQ+PHRleHQgeD0iNjUiIHk9IjI3OCIgZm9udC1zaXplPSIyNSI+7IS87Yq466CI7JWEIOKGkiDrgpjqs6Dslbwg4oaSIOqyjOuhnDwvdGV4dD48dGV4dCB4PSI2NSIgeT0iMzE0IiBmb250LXNpemU9IjIzIiBmaWxsPSIjNDA1ODRkIj7tnojri6QgMTHtmLggMTI6NDjigJMxNDoyOCDCtyDsmIjslb3Ct+qysOygnCDsmYTro4w8L3RleHQ+PHJlY3QgeD0iNDAiIHk9IjM2MCIgd2lkdGg9Ijg4MCIgaGVpZ2h0PSIxNTAiIHJ4PSIxNiIgZmlsbD0iI2ZmZmVmYSIvPjx0ZXh0IHg9IjY1IiB5PSI0MDUiIGZvbnQtc2l6ZT0iMzAiIGZvbnQtd2VpZ2h0PSI3MDAiPjExLzI3IOq4iCDCtyDrgpjqs6Dslbw8L3RleHQ+PHRleHQgeD0iNjUiIHk9IjQ0OCIgZm9udC1zaXplPSIyNSI+6rKM66GcIOKGkiDrgpjqs6Dslbwg4oaSIOyImeyGjCDtnLTsi50g4oaSIOyYpOyKpDwvdGV4dD48dGV4dCB4PSI2NSIgeT0iNDg0IiBmb250LXNpemU9IjIzIiBmaWxsPSIjNDA1ODRkIj7tnojri6QgOO2YuCAxMjoyMuKAkzE0OjA0IMK3IOyytOyekOumrCAxODozMDwvdGV4dD48cmVjdCB4PSI0MCIgeT0iNTMwIiB3aWR0aD0iODgwIiBoZWlnaHQ9IjE1MCIgcng9IjE2IiBmaWxsPSIjZmZmZWZhIi8+PHRleHQgeD0iNjUiIHk9IjU3NSIgZm9udC1zaXplPSIzMCIgZm9udC13ZWlnaHQ9IjcwMCI+MTEvMjgg7YagIMK3IOydtOuIhOyVvOuniDwvdGV4dD48dGV4dCB4PSI2NSIgeT0iNjE4IiBmb250LXNpemU9IjI1Ij7snbTriITslbzrp4jshLEg7Jm46rSAIOKGkiDtnLTsi50g4oaSIOyCrOy5tOyXkDwvdGV4dD48dGV4dCB4PSI2NSIgeT0iNjU0IiBmb250LXNpemU9IjIzIiBmaWxsPSIjNDA1ODRkIj7smZXrs7Ug7Yq567OE7LCowrfrrLTrgpjquLAg7KCA64WBIOyYiOyVvSDtmZXsnbgg7ZWE7JqUPC90ZXh0PjxyZWN0IHg9IjQwIiB5PSI3MDAiIHdpZHRoPSI4ODAiIGhlaWdodD0iMTUwIiByeD0iMTYiIGZpbGw9IiNmZmZlZmEiLz48dGV4dCB4PSI2NSIgeT0iNzQ1IiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iNzAwIj4xMS8yOSDsnbwgwrcg7Lac6rWtPC90ZXh0Pjx0ZXh0IHg9IjY1IiB5PSI3ODgiIGZvbnQtc2l6ZT0iMjUiPuqzte2VrSDrsLDshqEg4oaSIOuyhOuvuO2BmOudvCAwOTozMCDihpIg7Iug6raBIOKGkiDsiJjsobHqtIA8L3RleHQ+PHRleHQgeD0iNjUiIHk9IjgyNCIgZm9udC1zaXplPSIyMyIgZmlsbD0iIzQwNTg0ZCI+7IiY7KGx6rSAIDE1OjMwIOy2nOuwnCDCtyBUMSDslb0gMTY6MzDigJMxNjo1MCDrj4TssKk8L3RleHQ+PHRleHQgeD0iNjAiIHk9IjkyNSIgZm9udC1zaXplPSIyMiI+7JiI7JW9IOyZuCDsi5zqsIHsnYAg66qp7ZGc7J6F64uI64ukIMK3IOyekOyEuO2VnCDrgrTsmqnsnYAg67O466y4IO2ZleyduDwvdGV4dD48L2c+PC9zdmc+" width="960" height="960" alt="v12 일정 요약: 26일 게로, 27일 나고야·체자리, 28일 이누야마·사카에, 29일 버미큘라·신궁·수족관·출국" decoding="async">
+      </button>
+      <figcaption><strong>그림을 누르면 크게 볼 수 있습니다.</strong> 시간과 이동 순서는 위 상세 일정이 최종 기준입니다.</figcaption>
+    </figure>
+    <aside class="notebook-card" aria-labelledby="encyclopedia-title">
+      <h2 id="encyclopedia-title">궁금한 건 여행 백과사전에</h2>
+      <p>게로온천, 교통, 맛집, 관광지처럼 여행 중 궁금한 내용을 NotebookLM에서 바로 물어보세요.</p>
+      <a class="notebook-link" href="https://notebooklm.google.com/notebook/9ce4d86d-ba99-4e2d-b665-927692a4d668" target="_blank" rel="noopener">NotebookLM으로 질문하기</a>
+    </aside>
+  </section>
+
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="여행 가이드 그림">
+    <div class="lb-tools"><button class="close" type="button">닫기</button><button class="scale" type="button" aria-pressed="false">원본 크기</button></div>
+    <img src="" alt="여행 가이드 그림 크게 보기">
+  </div>
+
+<section id="latest"><h2 class="head">11월 여행에 반영한 최근 안내</h2><div class="box"><ul><li><strong>공항 짐 배송:</strong> Baggage GO 실증기간 2026.11.4~12.18, 설문·무료 쿠폰 적용 시 무료. 이번 여행은 11/28 15:00부터 신청하며 예약 성공 전까지 미확정입니다.</li><li><strong>면세 쇼핑:</strong> 2026.11.1 구매분부터 세금 포함 결제 후 출국 세관 반출 확인을 거쳐 환급합니다. 구매품·여권·영수증과 환급 방법을 준비하세요.</li><li><strong>겨울 조명:</strong> 오스·사카에 일대는 11/13부터, 나고야역 타워즈·게이트타워는 11/11부터 크리스마스 장식 운영 안내가 있습니다. 27·28일 기존 저녁 동선에서 짧게 즐기세요.</li><li><strong>Airbnb:</strong> 11/15 592,286원 결제 완료(영수증 메일 확인). 무료 취소는 11/22 15:00까지입니다.</li></ul><div class="links"><a href="https://www.pref.aichi.jp/press-release/aichi-digital-island-pj/tenimotsu2026.html" target="_blank" rel="noopener">아이치현 무료 배송 조건</a><a href="https://www.jtb.co.jp/kokunai/baggage-go/nagoya/kr/" target="_blank" rel="noopener">Baggage GO 한국어 신청 안내</a><a href="https://www.customs.go.jp/kaigairyoko/taxrefund.htm" target="_blank" rel="noopener">일본 세관 면세 환급 안내</a><a href="https://www.nagoya-info.jp/event/" target="_blank" rel="noopener">나고야 공식 행사 안내</a></div></div></section><section id="verified"><details class="fold"><summary><h2 class="head">확인 자료 · 남은 확인</h2><span class="fold-hint"><span class="closed">펼치기</span><span class="opened">접기</span></span></summary><div class="box"><p>2026.10.27 Gmail 대조: 히다 왕복(시간·인원·좌석·금액), 스이메이칸(숙박·조식·결제·취소), Airbnb(인원·날짜·결제예정·호스트 안내), 체자리(좌석 예약). 항공권은 3명분만 확인했습니다.</p><ul><li>버미큘라는 사용자 확인으로 11/29 09:30 예약 확정. 남은 확인: 공항 배송 신청·6개 접수, 나머지 항공권 3명·6인 총액·좌석, 스이메이칸 아동 나이 정정 및 객실별 배정·수영장, 실제 메이테쓰 열차·6석, 무나기 예약·메뉴 단가.</li><li>취소 기한은 예약 메일의 일본 현지시간 기준이며 한국과 시차가 없습니다. 예약 후 변경·취소가 있다면 최신 예약 화면을 우선하세요.</li><li>이누야마성 수리 공지의 제한 기간은 2027.1.4~2.28로 이번 일정에 해당하지 않습니다.</li></ul><div class="links"><a href="https://kotsuk.city.nagoya.jp/rp/subway/" target="_blank" rel="noopener">나고야 교통국 노선</a><a href="https://www.meitetsu.co.jp/train/timetable/index.html" target="_blank" rel="noopener">메이테쓰 공식 시간표</a><a href="https://www.meitetsu.co.jp/train/ticket_fare/mu/mu_ticket/index.html" target="_blank" rel="noopener">특별차 지정권 규정</a><a href="https://www.westjr.co.jp/global/kr/howto/train-reservation/receive/" target="_blank" rel="noopener">JR-WEST 표 수령</a><a href="https://www.vermicular.jp/village/dine/" target="_blank" rel="noopener">버미큘라 식당·베이커리</a><a href="https://www.vermicular.jp/village/studio/" target="_blank" rel="noopener">버미큘라 숍</a><a href="https://inuyama-castle.jp/guidance/" target="_blank" rel="noopener">이누야마성 요금·시간</a><a href="https://www.nagoyaaqua.jp/faq/" target="_blank" rel="noopener">수족관 관람·교통</a><a href="https://www.noritake.co.jp/mori/" target="_blank" rel="noopener">노리타케</a><a href="https://munagi.foodre.jp/" target="_blank" rel="noopener">무나기</a><a href="https://www.cesari.jp/" target="_blank" rel="noopener">체자리</a><a href="https://www.nitarou.com/store/" target="_blank" rel="noopener">니타로</a><a href="https://www.taiwannryouri-kakouen.net/" target="_blank" rel="noopener">華甲園</a><a href="https://www.centrair.jp/flight/airline/jinair.html" target="_blank" rel="noopener">센트레아 진에어</a></div></div></details></section>
+  <footer>
+    시각과 요금은 계획 시점 기준입니다. 출발 전 각 시설 공식 사이트에서 다시 확인하세요.<br>
+    v14 · 2026년 11월 16일 갱신 · Gmail 예약 메일 및 공식 자료 대조 반영. 예약번호·인증번호·숙소 출입 암호는 이 파일에 저장하지 않았습니다.
+  </footer>
+
+</div>
+<script>
+(function(){
+  'use strict';
+  function go(id,update){
+    var el=document.getElementById(id);if(!el)return;
+    var fold=el.querySelector('details.fold');if(fold)fold.open=true;
+    var nav=document.querySelector('nav.days');
+    var offset=nav?nav.getBoundingClientRect().height+8:8;
+    var reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({top:el.getBoundingClientRect().top+window.pageYOffset-offset,behavior:reduced?'auto':'smooth'});
+    document.querySelectorAll('nav.days a').forEach(function(a){if(a.dataset.go===id)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')});
+    if(update){try{history.pushState(null,'','#'+encodeURIComponent(id))}catch(e){location.hash=id}}
+    var target=el.querySelector('summary,h2,h3')||el;target.setAttribute('tabindex','-1');target.focus({preventScroll:true});
+  }
+  document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(!t||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey||e.button!==0)return;e.preventDefault();go(t.dataset.go,true)});
+  function hashGo(){var id;try{id=decodeURIComponent(location.hash.slice(1))}catch(e){return}if(id)go(id,false)}
+  window.addEventListener('popstate',hashGo);if(location.hash)requestAnimationFrame(hashGo);
+  var lb=document.getElementById('lightbox'),zoom=document.querySelector('button.zoom'),opener=null,priorOverflow='',inerted=[];
+  function closeLb(){if(!lb.classList.contains('on'))return;lb.classList.remove('on','full-size');lb.querySelector('.scale').setAttribute('aria-pressed','false');lb.querySelector('.scale').textContent='원본 크기';document.body.style.overflow=priorOverflow;inerted.forEach(function(s){s.el.inert=s.value});inerted=[];if(opener)opener.focus()}
+  zoom.addEventListener('click',function(){opener=zoom;var im=lb.querySelector('img');im.src=zoom.querySelector('img').src;lb.classList.add('on');priorOverflow=document.body.style.overflow;document.body.style.overflow='hidden';Array.from(lb.parentElement.children).forEach(function(el){if(el!==lb){inerted.push({el:el,value:el.inert});el.inert=true}});lb.querySelector('.close').focus()});
+  lb.querySelector('.close').addEventListener('click',closeLb);
+  lb.querySelector('.scale').addEventListener('click',function(){var full=lb.classList.toggle('full-size');this.setAttribute('aria-pressed',String(full));this.textContent=full?'화면에 맞추기':'원본 크기'});
+  lb.addEventListener('click',function(e){if(e.target===lb)closeLb()});
+  document.addEventListener('keydown',function(e){if(!lb.classList.contains('on'))return;if(e.key==='Escape'){e.preventDefault();closeLb();return}if(e.key==='Tab'){var focusables=Array.from(lb.querySelectorAll('button'));var first=focusables[0],last=focusables[focusables.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}});
+  var KEY='nagoya2026-v11-tasks',saved={},status=document.getElementById('save-status');
+  var boxes=Array.from(document.querySelectorAll('ul.check input[type=checkbox]'));
+  function message(txt,failed){status.textContent=txt;status.classList.toggle('save-failed',!!failed)}
+  try{var raw=JSON.parse(localStorage.getItem(KEY)||'{}');if(raw&&typeof raw==='object'&&!Array.isArray(raw))saved=raw}catch(e){message('저장값을 읽지 못했습니다. 체크는 현재 화면에서만 유지될 수 있습니다.',true)}
+  function persist(){try{localStorage.setItem(KEY,JSON.stringify(saved));message('이 기기에 저장했습니다. 다른 가족 기기에는 공유되지 않습니다.',false)}catch(e){message('이 기기에 저장할 수 없습니다. 새로고침하면 체크가 사라질 수 있습니다.',true)}}
+  boxes.forEach(function(b){if(typeof saved[b.id]==='boolean')b.checked=saved[b.id];b.addEventListener('change',function(){saved[b.id]=b.checked;persist()})});
+  document.getElementById('reset-checks').addEventListener('click',function(){saved={};boxes.forEach(function(b){b.checked=b.defaultChecked});persist();message('이 기기의 할 일 체크를 초기화했습니다.',false)});
+  var printState=[];window.addEventListener('beforeprint',function(){printState=Array.from(document.querySelectorAll('details.fold')).map(function(d){var s={el:d,open:d.open};d.open=true;return s})});window.addEventListener('afterprint',function(){printState.forEach(function(s){s.el.open=s.open});printState=[]});
+})();
+
+</script>
 </body>
 </html>
